@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<psalm
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config https://getpsalm.org/schema/config"
+    allowInternalNamedArgumentCalls="false"
+    allowNamedArgumentCalls="false"
+    cacheDirectory=".cache/psalm"
+    disableSuppressAll="true"
+    errorBaseline="psalm-baseline.xml"
+    errorLevel="1"
+    sealAllMethods="true"
+    sealAllProperties="true"
+    findUnusedCode="true"
+    findUnusedBaselineEntry="true"
+    findUnusedPsalmSuppress="true"
+    findUnusedVariablesAndParams="true"
+    ignoreInternalFunctionFalseReturn="false"
+    ignoreInternalFunctionNullReturn="false"
+    memoizeMethodCallResults="true"
+    strictBinaryOperands="true"
+>
+    <projectFiles>
+        <directory name="src"/>
+        <directory name="tests"/>
+        <ignoreFiles allowMissingFiles="true">
+            <directory name=".cache"/>
+            <directory name=".github"/>
+            <directory name="tests/Fixture"/>
+            <directory name="vendor"/>
+        </ignoreFiles>
+    </projectFiles>
+    <plugins>
+        <pluginClass class="Ghostwriter\PsalmPlugin\Plugin"/>
+    </plugins>
+</psalm>

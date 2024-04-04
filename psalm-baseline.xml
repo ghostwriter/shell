@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.23.1@8471a896ccea3526b26d082f4461eeea467f10a4">
+  <file src="src/EnvironmentVariables.php">
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$environmentVariables ?? getenv() ?: []]]></code>
+    </MixedArgumentTypeCoercion>
+  </file>
+  <file src="src/Exception/FailedExecutionException.php">
+    <UnusedClass>
+      <code><![CDATA[FailedExecutionException]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Exception/FailedToWriteToStdinException.php">
+    <UnusedClass>
+      <code><![CDATA[FailedToWriteToStdinException]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Exception/InvalidLengthException.php">
+    <UnusedClass>
+      <code><![CDATA[InvalidLengthException]]></code>
+    </UnusedClass>
+  </file>
+  <file src="src/Interface/CommandInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[arguments]]></code>
+      <code><![CDATA[name]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Interface/EnvironmentVariablesInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[toArray]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Interface/ProcessInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[command]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Interface/StatusInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[command]]></code>
+      <code><![CDATA[exitCode]]></code>
+      <code><![CDATA[running]]></code>
+      <code><![CDATA[signaled]]></code>
+      <code><![CDATA[stopSignal]]></code>
+      <code><![CDATA[stopped]]></code>
+      <code><![CDATA[terminateSignal]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Interface/StreamInterface.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[getMetadata]]></code>
+      <code><![CDATA[getSize]]></code>
+      <code><![CDATA[isReadable]]></code>
+      <code><![CDATA[isSeekable]]></code>
+      <code><![CDATA[isWritable]]></code>
+      <code><![CDATA[tell]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedReturnValue>
+      <code><![CDATA[int]]></code>
+    </PossiblyUnusedReturnValue>
+  </file>
+  <file src="src/Process.php">
+    <InvalidMethodCall>
+      <code><![CDATA[toArray]]></code>
+    </InvalidMethodCall>
+    <MismatchingDocblockParamType>
+      <code><![CDATA[null|array<string,string>]]></code>
+    </MismatchingDocblockParamType>
+    <MixedArgument>
+      <code><![CDATA[$environmentVariables->toArray()]]></code>
+    </MixedArgument>
+    <PossiblyNullReference>
+      <code><![CDATA[toArray]]></code>
+    </PossiblyNullReference>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[isTimedOut]]></code>
+      <code><![CDATA[pid]]></code>
+      <code><![CDATA[start]]></code>
+      <code><![CDATA[stop]]></code>
+      <code><![CDATA[wait]]></code>
+    </PossiblyUnusedMethod>
+    <RedundantConditionGivenDocblockType>
+      <code><![CDATA[is_resource($this->resource)]]></code>
+    </RedundantConditionGivenDocblockType>
+  </file>
+  <file src="src/Shell.php">
+    <InvalidArgument>
+      <code><![CDATA[EnvironmentVariables::new($environmentVariables)]]></code>
+    </InvalidArgument>
+  </file>
+  <file src="src/Stream.php">
+    <DocblockTypeContradiction>
+      <code><![CDATA[$this->resource === null]]></code>
+      <code><![CDATA[$this->resource === null]]></code>
+      <code><![CDATA[$this->resource === null]]></code>
+      <code><![CDATA[$this->resource === null]]></code>
+      <code><![CDATA[$this->resource === null]]></code>
+      <code><![CDATA[$this->resource === null]]></code>
+      <code><![CDATA[$this->resource === null]]></code>
+      <code><![CDATA[$this->resource === null]]></code>
+      <code><![CDATA[$this->resource === null]]></code>
+      <code><![CDATA[$this->resource === null]]></code>
+      <code><![CDATA[is_resource($this->resource)]]></code>
+      <code><![CDATA[is_resource($this->resource)]]></code>
+    </DocblockTypeContradiction>
+    <PossiblyNullPropertyAssignmentValue>
+      <code><![CDATA[null]]></code>
+    </PossiblyNullPropertyAssignmentValue>
+    <RedundantConditionGivenDocblockType>
+      <code><![CDATA[$this->resource !== null]]></code>
+      <code><![CDATA[$this->resource !== null]]></code>
+      <code><![CDATA[$this->resource !== null]]></code>
+    </RedundantConditionGivenDocblockType>
+    <UnusedMethod>
+      <code><![CDATA[streamIsUsable]]></code>
+    </UnusedMethod>
+  </file>
+  <file src="src/WorkingDirectory.php">
+    <PossiblyFalseArgument>
+      <code><![CDATA[$workingDirectory ?? getcwd()]]></code>
+    </PossiblyFalseArgument>
+  </file>
+  <file src="tests/Unit/ShellTest.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$temp]]></code>
+    </ArgumentTypeCoercion>
+    <MixedArgument>
+      <code><![CDATA[func_get_args()]]></code>
+      <code><![CDATA[func_get_args()]]></code>
+      <code><![CDATA[func_get_args()]]></code>
+      <code><![CDATA[func_get_args()]]></code>
+      <code><![CDATA[func_get_args()]]></code>
+    </MixedArgument>
+  </file>
+</files>

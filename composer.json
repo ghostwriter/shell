@@ -1,0 +1,102 @@
+{
+    "name": "ghostwriter/shell",
+    "description": "Execute commands and external programs",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "keywords": [
+        "ghostwriter",
+        "shell"
+    ],
+    "authors": [
+        {
+            "name": "Nathanael Esayeas",
+            "email": "nathanael.esayeas@protonmail.com",
+            "homepage": "https://github.com/ghostwriter",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://github.com/ghostwriter/shell",
+    "support": {
+        "issues": "https://github.com/ghostwriter/shell/issues",
+        "forum": "https://github.com/ghostwriter/shell/discussions",
+        "source": "https://github.com/ghostwriter/shell",
+        "docs": "https://github.com/ghostwriter/shell",
+        "rss": "https://github.com/ghostwriter/shell/releases.atom"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/ghostwriter"
+        }
+    ],
+    "require": {
+        "php": "^8.2"
+    },
+    "require-dev": {
+        "ghostwriter/coding-standard": "dev-main",
+        "ghostwriter/psalm-plugin": "^0.2 || ^1.0"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Ghostwriter\\Shell\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ghostwriter\\ShellTests\\": "tests"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ghostwriter/coding-standard": true
+        },
+        "classmap-authoritative": false,
+        "discard-changes": true,
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "prepend-autoloader": true,
+        "sort-packages": true,
+        "use-parent-dir": false
+    },
+    "scripts": {
+        "bench": "vendor/bin/phpbench --colors=always",
+        "cache:clear": "rm -fr ./.cache",
+        "check": [
+            "@composer validate",
+            "@cs",
+            "@test"
+        ],
+        "cs": [
+            "@phpcs",
+            "@phpcbf"
+        ],
+        "infection": [
+            "@xdebug",
+            "vendor/ghostwriter/coding-standard/tools/infection --ansi --verbose"
+        ],
+        "phpcbf": "vendor/ghostwriter/coding-standard/tools/phpcbf --colors --no-cache --standard=PSR12 -s ./src",
+        "phpcs": "vendor/ghostwriter/coding-standard/tools/phpcs --colors --no-cache --standard=PSR12 -s ./src",
+        "phpunit": [
+            "vendor/ghostwriter/coding-standard/tools/phpunit --do-not-cache-result --colors=always --stop-on-failure"
+        ],
+        "phpunit:migrate": "@phpunit --migrate-configuration",
+        "psalm": "vendor/ghostwriter/coding-standard/tools/psalm --shepherd --stats --no-diff --no-cache ",
+        "psalm:baseline": "@psalm --set-baseline=psalm-baseline.xml",
+        "psalm:dry-run": "@psalm --alter --issues=all --dry-run",
+        "psalm:home": [
+            "@psalm:shepherd",
+            "@psalm:security"
+        ],
+        "psalm:missing-return-types": "@psalm --alter --issues=MissingReturnType",
+        "psalm:security": "@psalm --taint-analysis",
+        "psalm:shepherd": "@psalm --shepherd --stats --no-diff --no-cache",
+        "test": [
+            "@phpunit",
+            "@psalm",
+            "@infection"
+        ],
+        "xdebug": "@putenv XDEBUG_MODE=coverage"
+    }
+}
