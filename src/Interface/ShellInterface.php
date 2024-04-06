@@ -15,6 +15,6 @@ interface ShellInterface
         array $arguments = [],
         ?string $workingDirectory = null,
         ?array $environmentVariables = null,
-        ?string $stdin = null,
+        ?string $input = null,
     ): ResultInterface;
 }

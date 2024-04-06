@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e6f47fdd87aff6c6f93c7581ac7c09a4",
+    "content-hash": "16ccfd5c5d6584e36410b1f3f52f4cc2",
     "packages": [],
     "packages-dev": [
         {
@@ -1055,12 +1055,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "3dc242b31c0c69637b56c4f86babb58a36d46a8e"
+                "reference": "673a9fd8286a7f7c661b1401b9914de4bb08f018"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/3dc242b31c0c69637b56c4f86babb58a36d46a8e",
-                "reference": "3dc242b31c0c69637b56c4f86babb58a36d46a8e",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/673a9fd8286a7f7c661b1401b9914de4bb08f018",
+                "reference": "673a9fd8286a7f7c661b1401b9914de4bb08f018",
                 "shasum": ""
             },
             "require": {
@@ -1125,7 +1125,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-04-05T13:24:06+00:00"
+            "time": "2024-04-06T23:27:42+00:00"
         },
         {
             "name": "ghostwriter/psalm-plugin",
@@ -4880,7 +4880,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2"
+        "php": "^8.3"
     },
     "platform-dev": [],
     "plugin-api-version": "2.6.0"

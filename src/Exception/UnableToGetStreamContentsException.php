@@ -7,6 +7,6 @@ namespace Ghostwriter\Shell\Exception;
 use Ghostwriter\Shell\Interface\ExceptionInterface;
 use RuntimeException;
 
-final class StreamResourceIsNotAttachedException extends RuntimeException implements ExceptionInterface
+final class UnableToGetStreamContentsException extends RuntimeException implements ExceptionInterface
 {
 }

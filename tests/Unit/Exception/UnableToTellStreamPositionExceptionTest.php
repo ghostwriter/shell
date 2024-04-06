@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Ghostwriter\ShellTests\Unit\Exception;
+
+use Ghostwriter\Shell\Exception\UnableToTellStreamPositionException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
+
+#[CoversClass(UnableToTellStreamPositionException::class)]
+final class UnableToTellStreamPositionExceptionTest extends TestCase
+{
+}

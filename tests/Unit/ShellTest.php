@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\ShellTests\Unit;
 
+use Generator;
 use Ghostwriter\Shell\Command;
 use Ghostwriter\Shell\EnvironmentVariables;
 use Ghostwriter\Shell\Exception\CommandArgumentCannotBeEmptyException;
@@ -15,9 +16,13 @@ use Ghostwriter\Shell\Result;
 use Ghostwriter\Shell\Runner;
 use Ghostwriter\Shell\Shell;
 use Ghostwriter\Shell\Status;
-use Ghostwriter\Shell\Stream;
+use Ghostwriter\Shell\Stdio;
+use Ghostwriter\Shell\Task\CloseDescriptorTask;
+use Ghostwriter\Shell\Task\ReadDescriptorTask;
+use Ghostwriter\Shell\Trait\DescriptorTrait;
 use Ghostwriter\Shell\WorkingDirectory;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
@@ -28,14 +33,17 @@ use function getcwd;
 use function putenv;
 use function sys_get_temp_dir;
 
+#[CoversClass(CloseDescriptorTask::class)]
 #[CoversClass(Command::class)]
+#[CoversClass(DescriptorTrait::class)]
 #[CoversClass(EnvironmentVariables::class)]
-#[CoversClass(Result::class)]
 #[CoversClass(Process::class)]
+#[CoversClass(ReadDescriptorTask::class)]
+#[CoversClass(Result::class)]
 #[CoversClass(Runner::class)]
 #[CoversClass(Shell::class)]
 #[CoversClass(Status::class)]
-#[CoversClass(Stream::class)]
+#[CoversClass(Stdio::class)]
 #[CoversClass(WorkingDirectory::class)]
 final class ShellTest extends TestCase
 {
@@ -50,38 +58,10 @@ final class ShellTest extends TestCase
     /**
      * @throws Throwable
      */
-    public function exitCode(): int
-    {
-        return $this->execute(...func_get_args())
-            ->exitCode();
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public function stderr(): string
-    {
-        return $this->execute(...func_get_args())
-            ->stderr();
-    }
-
-    /**
-     * @throws Throwable
-     */
     public function stdout(): string
     {
         return $this->execute(...func_get_args())
             ->stdout();
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public function testCurrentWorkingDirectory(): void
-    {
-        $cwd = getcwd();
-        self::assertNotEmpty($cwd);
-        self::assertSame($cwd, $this->stdout(PHP_BINARY, ['-r', 'echo getcwd();']));
     }
 
     /**
@@ -99,30 +79,30 @@ final class ShellTest extends TestCase
     }
 
     /**
+     * @param list<string>              $arguments
+     * @param null|array<string,string> $environmentVariables
+     *
      * @throws Throwable
      */
-    public function testEnvironmentVariablesViaParameter(): void
-    {
-        self::assertSame(
-            'TRUE',
-            $this->stdout(PHP_BINARY, ['-r', 'echo getenv("BLM");'], null, [
-                'BLM' => 'TRUE',
-            ])
-        );
-    }
+    #[DataProvider('executeDataProvider')]
+    public function testExecute(
+        string $command,
+        array $arguments,
+        ?string $workingDirectory = null,
+        ?array $environmentVariables = null,
+        ?string $input = null,
+        int $exitCode = -9999,
+        string $stdout = '',
+        string $stderr = ''
+    ): void {
+        $result = Shell::new()
+            ->execute($command, $arguments, $workingDirectory, $environmentVariables, $input);
 
-    /**
-     * @throws Throwable
-     */
-    public function testExecute(): void
-    {
-        $result = $this->execute(PHP_BINARY, ['-r', 'echo "#BlackLivesMatter";']);
+        self::assertSame($exitCode, $result->exitCode());
 
-        self::assertSame(0, $result->exitCode());
+        self::assertSame($stdout, $result->stdout());
 
-        self::assertSame('#BlackLivesMatter', $result->stdout());
-
-        self::assertEmpty($result->stderr());
+        self::assertSame($stderr, $result->stderr());
     }
 
     /**
@@ -130,10 +110,15 @@ final class ShellTest extends TestCase
      */
     public function testFailedExecution(): void
     {
+        $expected = 'Uncaught Error: Call to undefined function blackLivesMatter() in Command line code';
+
         $result = $this->execute(PHP_BINARY, ['-r', 'blackLivesMatter("#BLM!");']);
 
         self::assertSame(255, $result->exitCode());
-        self::assertStringContainsString('Call to undefined function blackLivesMatter()', $result->stderr());
+
+        self::assertStringContainsString($expected, $result->stdout());
+
+        self::assertStringContainsString($expected, $result->stderr());
     }
 
     /**
@@ -202,5 +187,73 @@ final class ShellTest extends TestCase
         $result = $this->execute(PHP_BINARY, ['-r', 'echo getcwd();'], $temp);
 
         self::assertStringEndsWith($temp, $result->stdout());
+    }
+
+    public static function executeDataProvider(): Generator
+    {
+        // $command, $arguments, $workingDirectory, $environmentVariables, $input, $exitCode, $stdout, $stderr
+        $command = PHP_BINARY;
+        $workingDirectory = getcwd();
+        $environmentVariables = null;
+        $input = null;
+        yield from [
+            '#BLM' => [
+                $command,
+                ['-r', 'echo "#BLM";'],
+                $workingDirectory,
+                $environmentVariables,
+                $input,
+                0,
+                '#BLM',
+                '',
+            ],
+            '#BlackLivesMatter' => [
+                $command,
+                ['-r', 'echo "#BlackLivesMatter";'],
+                $workingDirectory,
+                $environmentVariables,
+                $input,
+                0,
+                '#BlackLivesMatter',
+                '',
+            ],
+
+            'current working directory' => [
+                $command,
+                ['-r', 'echo getcwd();'],
+                $workingDirectory,
+                $environmentVariables,
+                $input,
+                0,
+                $workingDirectory,
+                '',
+            ],
+
+            'provide environment variables' => [
+                $command,
+                ['-r', 'echo getenv("BLM");'],
+                $workingDirectory,
+                [
+                    'BLM' => 'TRUE',
+                ],
+                $input,
+                0,
+                'TRUE',
+                '',
+            ],
+
+            'stdout + stderr' => [
+                $command,
+                ['-r', 'fwrite(STDOUT, "#BLM"); fwrite(STDERR, "#BlackLivesMatter");'],
+                $workingDirectory,
+                [
+                    'BLM' => 'TRUE',
+                ],
+                $input,
+                0,
+                '#BLM',
+                '#BlackLivesMatter',
+            ],
+        ];
     }
 }

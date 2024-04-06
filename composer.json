@@ -5,7 +5,8 @@
     "type": "library",
     "keywords": [
         "ghostwriter",
-        "shell"
+        "shell",
+        "process"
     ],
     "authors": [
         {
@@ -30,7 +31,7 @@
         }
     ],
     "require": {
-        "php": "^8.2"
+        "php": "^8.3"
     },
     "require-dev": {
         "ghostwriter/coding-standard": "dev-main",
@@ -79,7 +80,7 @@
         "phpcbf": "vendor/ghostwriter/coding-standard/tools/phpcbf --colors --no-cache --standard=PSR12 -s ./src",
         "phpcs": "vendor/ghostwriter/coding-standard/tools/phpcs --colors --no-cache --standard=PSR12 -s ./src",
         "phpunit": [
-            "vendor/ghostwriter/coding-standard/tools/phpunit --do-not-cache-result --colors=always --stop-on-failure"
+            "vendor/ghostwriter/coding-standard/tools/phpunit --do-not-cache-result --colors=always"
         ],
         "phpunit:migrate": "@phpunit --migrate-configuration",
         "psalm": "vendor/ghostwriter/coding-standard/tools/psalm --shepherd --stats --no-diff --no-cache ",

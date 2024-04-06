@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Shell;
 
-use Ghostwriter\Shell\Interface\ProcessInterface;
 use Ghostwriter\Shell\Interface\ResultInterface;
-use Throwable;
 
 final readonly class Result implements ResultInterface
 {
@@ -32,11 +30,8 @@ final readonly class Result implements ResultInterface
         return $this->stdout;
     }
 
-    /**
-     * @throws Throwable
-     */
-    public static function new(ProcessInterface $process): ResultInterface
+    public static function new(int $exitCode, string $stdout, string $stderr): self
     {
-        return new self($process->close(), $process->stdout()->toString(), $process->stderr()->toString());
+        return new self($exitCode, $stdout, $stderr);
     }
 }

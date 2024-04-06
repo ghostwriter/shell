@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Ghostwriter\ShellTests\Unit\Exception;
+
+use Ghostwriter\Shell\Exception\InvalidWorkingDirectoryException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
+
+#[CoversClass(InvalidWorkingDirectoryException::class)]
+final class InvalidWorkingDirectoryExceptionTest extends TestCase
+{
+}

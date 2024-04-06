@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Ghostwriter\ShellTests\Unit\Exception;
+
+use Ghostwriter\Shell\Exception\ProcessStoppedViaSignalException;
+use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
+
+#[CoversClass(ProcessStoppedViaSignalException::class)]
+final class ProcessStoppedViaSignalExceptionTest extends TestCase
+{
+}

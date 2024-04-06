@@ -26,6 +26,9 @@ final readonly class EnvironmentVariables implements EnvironmentVariablesInterfa
         return $this->environmentVariables;
     }
 
+    /**
+     * @param null|array<string,string> $environmentVariables
+     */
     public static function new(?array $environmentVariables = null): self
     {
         return new self($environmentVariables ?? getenv() ?: []);

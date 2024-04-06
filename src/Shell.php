@@ -10,6 +10,8 @@ use Ghostwriter\Shell\Exception\ProcOpenFunctionNotAvailableException;
 use Ghostwriter\Shell\Interface\ResultInterface;
 use Ghostwriter\Shell\Interface\RunnerInterface;
 use Ghostwriter\Shell\Interface\ShellInterface;
+use Ghostwriter\Shell\Task\CloseDescriptorTask;
+use Ghostwriter\Shell\Task\ReadDescriptorTask;
 use Throwable;
 
 use function explode;
@@ -22,7 +24,7 @@ use function ini_get;
 final readonly class Shell implements ShellInterface
 {
     public function __construct(
-        private RunnerInterface $processRunner,
+        private RunnerInterface $runner,
     ) {
         if (! extension_loaded('pcntl')) {
             throw new PcntlExtensionNotAvailableException();
@@ -43,6 +45,10 @@ final readonly class Shell implements ShellInterface
         }
     }
 
+    public function __destruct()
+    {
+    }
+
     /**
      * @param list<string>              $arguments
      * @param null|array<string,string> $environmentVariables
@@ -54,7 +60,7 @@ final readonly class Shell implements ShellInterface
         array $arguments = [],
         ?string $workingDirectory = null,
         ?array $environmentVariables = null,
-        ?string $stdin = null,
+        ?string $input = null,
     ): ResultInterface {
         $process = Process::new(
             Command::new($command, $arguments),
@@ -62,17 +68,18 @@ final readonly class Shell implements ShellInterface
             EnvironmentVariables::new($environmentVariables)
         );
 
-        if ($stdin !== null) {
-            $processStdin = $process->stdin();
-            $processStdin->write($stdin);
+        if ($input !== null) {
+            $processStdin = $process->stdio()
+                ->stdin();
+            $processStdin->write($input);
             $processStdin->close();
         }
 
-        return $this->processRunner->run($process);
+        return $this->runner->run($process);
     }
 
     public static function new(): self
     {
-        return new self(new Runner());
+        return new self(Runner::new(before: new ReadDescriptorTask(), after: new CloseDescriptorTask()));
     }
 }

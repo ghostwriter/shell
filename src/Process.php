@@ -11,11 +11,9 @@ use Ghostwriter\Shell\Exception\ProcessIsNotRunningException;
 use Ghostwriter\Shell\Interface\CommandInterface;
 use Ghostwriter\Shell\Interface\EnvironmentVariablesInterface;
 use Ghostwriter\Shell\Interface\ProcessInterface;
-use Ghostwriter\Shell\Interface\StatusInterface;
-use Ghostwriter\Shell\Interface\StreamInterface;
+use Ghostwriter\Shell\Interface\StdioInterface;
 use Ghostwriter\Shell\Interface\WorkingDirectoryInterface;
 
-use function hrtime;
 use function is_resource;
 use function proc_close;
 use function proc_open;
@@ -28,27 +26,44 @@ final readonly class Process implements ProcessInterface
     /**
      * @var array{0:array{0:string,1:string},1:array{0:string,1:string},2:array{0:string,1:string}}
      */
-    public const DESCRIPTORS = [
-        0 => ['pipe', 'rb'], // stdin
-        1 => ['pipe', 'wb'], // stdout
-        2 => ['pipe', 'wb'], // stderr
+    public const array DESCRIPTORS = [
+        0 => ['pipe', 'r+b'], // stdin
+        1 => ['pipe', 'w+b'], // stdout
+        2 => ['pipe', 'w+b'], // stderr
     ];
 
     /**
-     * @param resource $resource
+     * @param closed-resource|resource $stream
      */
     public function __construct(
         private CommandInterface $command,
-        private mixed $resource,
-        private StreamInterface $stdin,
-        private StreamInterface $stdout,
-        private StreamInterface $stderr,
+        private EnvironmentVariablesInterface $environmentVariables,
+        private StdioInterface $stdio,
+        private mixed $stream,
+        private WorkingDirectoryInterface $workingDirectory,
     ) {
+    }
+
+    public function __destruct()
+    {
+        $this->stdio->close();
+
+        if (! is_resource($this->stream)) {
+            return;
+        }
+
+        if (! proc_terminate($this->stream, $signal)) {
+            throw new FailedToTerminateProcessException();
+        }
     }
 
     public function close(): int
     {
-        return proc_close($this->resource);
+        if (! is_resource($this->stream)) {
+            throw new ProcessIsNotRunningException();
+        }
+
+        return proc_close($this->stream);
     }
 
     public function command(): CommandInterface
@@ -56,114 +71,37 @@ final readonly class Process implements ProcessInterface
         return $this->command;
     }
 
-    public function isRunning(): bool
+    public function environmentVariables(): EnvironmentVariablesInterface
     {
-        return is_resource($this->resource);
+        return $this->environmentVariables;
     }
 
-    /**
-     * Returns true if the process is passed the maximum execution time.
-     */
-    public function isTimedOut(): bool
+    public function stdio(): StdioInterface
     {
-        $startTime = hrtime(true);
-        $maximumExecutionTime = 60; // 60 seconds
-        return ($startTime + $maximumExecutionTime) < hrtime(true);
+        return $this->stdio;
     }
 
-    public function pid(): int
+    public function workingDirectory(): WorkingDirectoryInterface
     {
-        if (! $this->isRunning()) {
-            return -1;
-        }
-
-        return $this->status()
-            ->pid();
+        return $this->workingDirectory;
     }
 
-    /**
-     * @return resource
-     */
-    public function resource(): mixed
-    {
-        return $this->resource;
-    }
-
-    public function start(): self
-    {
-        return $this;
-    }
-
-    public function status(): StatusInterface
-    {
-        if (! $this->isRunning()) {
-            throw new ProcessIsNotRunningException();
-        }
-
-        return Status::new($this->resource);
-    }
-
-    public function stderr(): StreamInterface
-    {
-        return $this->stderr;
-    }
-
-    public function stdin(): StreamInterface
-    {
-        return $this->stdin;
-    }
-
-    public function stdout(): StreamInterface
-    {
-        return $this->stdout;
-    }
-
-    public function stop(): self
-    {
-        if (! $this->isRunning()) {
-            return $this;
-        }
-
-        return $this->terminate();
-    }
-
-    public function terminate(int $signal = 15): self
-    {
-        if (! $this->isRunning()) {
-            return $this;
-        }
-
-        if (! proc_terminate($this->resource, $signal)) {
-            throw new FailedToTerminateProcessException();
-        }
-
-        return $this;
-    }
-
-    public function wait(): self
-    {
-        return $this;
-    }
-
-    /**
-     * @param null|array<string,string> $environmentVariables
-     */
     public static function new(
         CommandInterface $command,
         WorkingDirectoryInterface $workingDirectory,
         EnvironmentVariablesInterface $environmentVariables,
     ): self {
-        /** @var array<int,resource> $pipes */
-        $pipes = [];
-
         set_error_handler(
             static function (int $severity, string $message): void {
                 throw new FailedToExecuteCommandException($message, $severity);
             }
         );
 
+        /** @var array{0:resource,1:resource,2:resource} $pipes */
+        $pipes = [];
+
         try {
-            $resource = proc_open(
+            $stream = proc_open(
                 $command->toArray(),
                 self::DESCRIPTORS,
                 $pipes,
@@ -174,16 +112,16 @@ final readonly class Process implements ProcessInterface
             restore_error_handler();
         }
 
-        if ($resource === false) {
+        if ($stream === false) {
             throw new FailedToOpenProcessException();
         }
 
         return new self(
             command: $command,
-            resource: $resource,
-            stdin: Stream::new($pipes[0]),
-            stdout: Stream::new($pipes[1]),
-            stderr: Stream::new($pipes[2]),
+            environmentVariables: $environmentVariables,
+            stdio: Stdio::new($pipes),
+            stream: $stream,
+            workingDirectory: $workingDirectory,
         );
     }
 }

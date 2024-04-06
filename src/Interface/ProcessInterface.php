@@ -6,17 +6,16 @@ namespace Ghostwriter\Shell\Interface;
 
 interface ProcessInterface
 {
-    //    public function open(
-    //        string $command,
-    //        ?string $cwd = null,
-    //        ?array $env = null,
-    //        ?array $options = null
-    //    ): int;
-
+    //    public function wait(): self;
     public function close(): int;
 
     public function command(): CommandInterface;
 
+    public function environmentVariables(): EnvironmentVariablesInterface;
+
+    public function stdio(): StdioInterface;
+
+    public function workingDirectory(): WorkingDirectoryInterface;
     //    public function isRunning(): bool;
     //
     //    public function pid(): int;
@@ -25,20 +24,5 @@ interface ProcessInterface
     //
     //    public function stop(): self;
     //
-    //    public function terminate(): self;
-    //
-    //    public function wait(): self;
-
-    /**
-     * @return resource
-     */
-    public function resource(): mixed;
-
-    public function status(): StatusInterface;
-
-    public function stderr(): StreamInterface;
-
-    public function stdin(): StreamInterface;
-
-    public function stdout(): StreamInterface;
+    //    public function terminate(int $signal = 15): void;
 }
