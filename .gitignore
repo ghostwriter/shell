@@ -1,4 +1,3 @@
 /.cache/
 /vendor/
 /.env
-/clover.xml
