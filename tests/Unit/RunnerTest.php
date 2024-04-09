@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Runner::class)]
 final class RunnerTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
