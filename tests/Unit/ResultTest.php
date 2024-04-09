@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Result::class)]
 final class ResultTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
