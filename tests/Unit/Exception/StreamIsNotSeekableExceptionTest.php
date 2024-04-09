@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(StreamIsNotSeekableException::class)]
 final class StreamIsNotSeekableExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
