@@ -41,8 +41,7 @@ final readonly class Process implements ProcessInterface
         private StdioInterface $stdio,
         private mixed $stream,
         private WorkingDirectoryInterface $workingDirectory,
-    ) {
-    }
+    ) {}
 
     public function __destruct()
     {
