@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(WriteDescriptorTask::class)]
 final class WriteDescriptorTaskTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
