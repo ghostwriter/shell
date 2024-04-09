@@ -45,9 +45,7 @@ final readonly class Shell implements ShellInterface
         }
     }
 
-    public function __destruct()
-    {
-    }
+    public function __destruct() {}
 
     /**
      * @param list<string>              $arguments
