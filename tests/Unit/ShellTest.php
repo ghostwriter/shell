@@ -26,12 +26,12 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
-use const PHP_BINARY;
-
 use function func_get_args;
 use function getcwd;
 use function putenv;
 use function sys_get_temp_dir;
+
+use const PHP_BINARY;
 
 #[CoversClass(CloseDescriptorTask::class)]
 #[CoversClass(Command::class)]
