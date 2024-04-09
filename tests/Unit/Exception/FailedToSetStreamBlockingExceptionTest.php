@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(FailedToSetStreamBlockingException::class)]
 final class FailedToSetStreamBlockingExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
