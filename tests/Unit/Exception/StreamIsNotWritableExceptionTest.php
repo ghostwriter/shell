@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(StreamIsNotWritableException::class)]
 final class StreamIsNotWritableExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
