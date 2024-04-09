@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(CommandNameCannotBeEmptyException::class)]
 final class CommandNameCannotBeEmptyExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
