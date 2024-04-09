@@ -12,8 +12,7 @@ final readonly class WriteDescriptorTask implements TaskInterface
 {
     public function __construct(
         private string $content
-    ) {
-    }
+    ) {}
 
     public function __invoke(DescriptorInterface $descriptor): void
     {
