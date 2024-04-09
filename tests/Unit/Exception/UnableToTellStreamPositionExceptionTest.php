@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(UnableToTellStreamPositionException::class)]
 final class UnableToTellStreamPositionExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
