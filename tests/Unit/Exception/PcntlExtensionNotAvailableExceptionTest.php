@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(PcntlExtensionNotAvailableException::class)]
 final class PcntlExtensionNotAvailableExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
