@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ProcessTerminatedViaSignalException::class)]
 final class ProcessTerminatedViaSignalExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
