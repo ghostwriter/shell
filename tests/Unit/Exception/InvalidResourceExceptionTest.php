@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(InvalidResourceException::class)]
 final class InvalidResourceExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
