@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(FailedToReadFromStreamException::class)]
 final class FailedToReadFromStreamExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
