@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(CloseDescriptorTask::class)]
 final class CloseDescriptorTaskTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
