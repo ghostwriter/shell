@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ProcessIsNotRunningException::class)]
 final class ProcessIsNotRunningExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
