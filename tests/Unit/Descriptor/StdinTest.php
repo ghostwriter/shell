@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Stdin::class)]
 final class StdinTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
