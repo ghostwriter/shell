@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(NullPointerException::class)]
 final class NullPointerExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
