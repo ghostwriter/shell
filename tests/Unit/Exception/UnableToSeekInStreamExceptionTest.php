@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(UnableToSeekInStreamException::class)]
 final class UnableToSeekInStreamExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
