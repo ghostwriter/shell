@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(ProcOpenFunctionIsDisabledException::class)]
 final class ProcOpenFunctionIsDisabledExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
