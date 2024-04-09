@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Process::class)]
 final class ProcessTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
