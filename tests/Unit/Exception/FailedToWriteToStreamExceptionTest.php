@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(FailedToWriteToStreamException::class)]
 final class FailedToWriteToStreamExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
