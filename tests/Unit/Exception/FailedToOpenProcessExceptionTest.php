@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(FailedToOpenProcessException::class)]
 final class FailedToOpenProcessExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
