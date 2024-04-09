@@ -15,8 +15,7 @@ final readonly class EnvironmentVariables implements EnvironmentVariablesInterfa
      */
     public function __construct(
         private array $environmentVariables,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array<string,string>
