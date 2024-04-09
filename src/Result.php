@@ -12,8 +12,7 @@ final readonly class Result implements ResultInterface
         private int $exitCode,
         private string $stdout,
         private string $stderr,
-    ) {
-    }
+    ) {}
 
     public function exitCode(): int
     {
