@@ -19,8 +19,7 @@ final readonly class Runner implements RunnerInterface
     public function __construct(
         private TaskInterface $before,
         private TaskInterface $after
-    ) {
-    }
+    ) {}
 
     public function run(ProcessInterface $process, TaskInterface ...$tasks): ResultInterface
     {
