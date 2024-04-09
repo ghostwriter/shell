@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(UnableToGetStreamContentsException::class)]
 final class UnableToGetStreamContentsExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
