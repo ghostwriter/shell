@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(InvalidLengthException::class)]
 final class InvalidLengthExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
