@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(InvalidStreamResourceException::class)]
 final class InvalidStreamResourceExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
