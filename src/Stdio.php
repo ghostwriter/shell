@@ -20,8 +20,7 @@ final readonly class Stdio implements StdioInterface
         private StdinInterface $stdin,
         private StdoutInterface $stdout,
         private StderrInterface $stderr,
-    ) {
-    }
+    ) {}
 
     public function __destruct()
     {
