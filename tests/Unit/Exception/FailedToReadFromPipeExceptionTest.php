@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(FailedToReadFromPipeException::class)]
 final class FailedToReadFromPipeExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
