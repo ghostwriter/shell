@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(Stdout::class)]
 final class StdoutTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
