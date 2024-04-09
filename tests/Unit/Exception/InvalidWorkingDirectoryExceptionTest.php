@@ -11,4 +11,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(InvalidWorkingDirectoryException::class)]
 final class InvalidWorkingDirectoryExceptionTest extends TestCase
 {
+    public function testExample(): void
+    {
+        self::assertTrue(true);
+    }
 }
