@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\ShellTests\Unit\Task;
+namespace Tests\Unit\Task;
 
 use Ghostwriter\Shell\Task\ReadDescriptorTask;
 use PHPUnit\Framework\Attributes\CoversClass;
