@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\ShellTests\Unit\Exception;
+namespace Tests\Unit\Exception;
 
 use Ghostwriter\Shell\Exception\CommandNameCannotBeEmptyException;
 use PHPUnit\Framework\Attributes\CoversClass;
