@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\ShellTests\Unit;
+namespace Tests\Unit;
 
 use Ghostwriter\Shell\Process;
 use PHPUnit\Framework\Attributes\CoversClass;
