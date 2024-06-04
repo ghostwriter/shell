@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Shell;
 
 use Ghostwriter\Shell\Interface\ResultInterface;
+use Override;
 
 final readonly class Result implements ResultInterface
 {
@@ -14,16 +15,19 @@ final readonly class Result implements ResultInterface
         private string $stderr,
     ) {}
 
+    #[Override]
     public function exitCode(): int
     {
         return $this->exitCode;
     }
 
+    #[Override]
     public function stderr(): string
     {
         return $this->stderr;
     }
 
+    #[Override]
     public function stdout(): string
     {
         return $this->stdout;
