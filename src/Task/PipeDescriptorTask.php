@@ -9,6 +9,7 @@ use Ghostwriter\Shell\Exception\FailedToReadFromStreamException;
 use Ghostwriter\Shell\Exception\FailedToWriteToStreamException;
 use Ghostwriter\Shell\Interface\DescriptorInterface;
 use Ghostwriter\Shell\Interface\TaskInterface;
+use Override;
 
 final readonly class PipeDescriptorTask implements TaskInterface
 {
@@ -16,6 +17,7 @@ final readonly class PipeDescriptorTask implements TaskInterface
         private DescriptorInterface $descriptor,
     ) {}
 
+    #[Override]
     public function __invoke(DescriptorInterface $descriptor): void
     {
         do {
