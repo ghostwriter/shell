@@ -10,6 +10,7 @@ use Ghostwriter\Shell\Interface\ResultInterface;
 use Ghostwriter\Shell\Interface\RunnerInterface;
 use Ghostwriter\Shell\Interface\TaskInterface;
 use Ghostwriter\Shell\Task\NoopTask;
+use Override;
 use SplQueue;
 
 use function array_unshift;
@@ -21,6 +22,7 @@ final readonly class Runner implements RunnerInterface
         private TaskInterface $after
     ) {}
 
+    #[Override]
     public function run(ProcessInterface $process, TaskInterface ...$tasks): ResultInterface
     {
         array_unshift($tasks, $this->before);
