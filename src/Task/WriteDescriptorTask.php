@@ -7,6 +7,7 @@ namespace Ghostwriter\Shell\Task;
 use Fiber;
 use Ghostwriter\Shell\Interface\DescriptorInterface;
 use Ghostwriter\Shell\Interface\TaskInterface;
+use Override;
 
 final readonly class WriteDescriptorTask implements TaskInterface
 {
@@ -14,6 +15,7 @@ final readonly class WriteDescriptorTask implements TaskInterface
         private string $content
     ) {}
 
+    #[Override]
     public function __invoke(DescriptorInterface $descriptor): void
     {
         do {
