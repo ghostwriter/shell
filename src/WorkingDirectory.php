@@ -6,12 +6,16 @@ namespace Ghostwriter\Shell;
 
 use Ghostwriter\Shell\Exception\InvalidWorkingDirectoryException;
 use Ghostwriter\Shell\Interface\WorkingDirectoryInterface;
+use Override;
 
 use function getcwd;
 use function is_dir;
 
 final readonly class WorkingDirectory implements WorkingDirectoryInterface
 {
+    /**
+     * @throws InvalidWorkingDirectoryException
+     */
     public function __construct(
         private string $path,
     ) {
@@ -20,13 +24,20 @@ final readonly class WorkingDirectory implements WorkingDirectoryInterface
         }
     }
 
+    #[Override]
     public function toString(): string
     {
         return $this->path;
     }
 
+    /**
+     * @throws InvalidWorkingDirectoryException
+     */
     public static function new(?string $workingDirectory = null): self
     {
-        return new self($workingDirectory ?? getcwd());
+        return new self(match (true) {
+            $workingDirectory === null => getcwd(),
+            default => $workingDirectory,
+        });
     }
 }
