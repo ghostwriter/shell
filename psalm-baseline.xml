@@ -1,38 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.23.1@8471a896ccea3526b26d082f4461eeea467f10a4">
-  <file src="src/Command.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function arguments(): array]]></code>
-      <code><![CDATA[public function name(): string]]></code>
-      <code><![CDATA[public function toArray(): array]]></code>
-    </MissingOverrideAttribute>
-    <MissingThrowsDocblock>
-      <code><![CDATA[throw new CommandNameCannotBeEmptyException();]]></code>
-    </MissingThrowsDocblock>
-  </file>
-  <file src="src/EnvironmentVariables.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function toArray(): array]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="src/Interface/Descriptor/SeekableInterface.php">
-    <UndefinedDocblockClass>
-      <code><![CDATA[RuntimeException]]></code>
-      <code><![CDATA[RuntimeException]]></code>
-      <code><![CDATA[RuntimeException]]></code>
-    </UndefinedDocblockClass>
-    <UnusedClass>
-      <code><![CDATA[SeekableInterface]]></code>
-    </UnusedClass>
-  </file>
-  <file src="src/Interface/Descriptor/WritableInterface.php">
-    <PossiblyUnusedReturnValue>
-      <code><![CDATA[int]]></code>
-    </PossiblyUnusedReturnValue>
-    <UndefinedDocblockClass>
-      <code><![CDATA[RuntimeException]]></code>
-    </UndefinedDocblockClass>
-  </file>
+<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
   <file src="src/Interface/ProcessInterface.php">
     <PossiblyUnusedMethod>
       <code><![CDATA[command]]></code>
@@ -63,136 +30,24 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="src/Process.php">
-    <LessSpecificReturnType>
-      <code><![CDATA[void]]></code>
-    </LessSpecificReturnType>
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function close(): int]]></code>
-      <code><![CDATA[public function command(): CommandInterface]]></code>
-      <code><![CDATA[public function environmentVariables(): EnvironmentVariablesInterface]]></code>
-      <code><![CDATA[public function stdio(): StdioInterface]]></code>
-      <code><![CDATA[public function workingDirectory(): WorkingDirectoryInterface]]></code>
-    </MissingOverrideAttribute>
-    <MissingThrowsDocblock>
-      <code><![CDATA[throw new FailedToOpenProcessException();]]></code>
-      <code><![CDATA[throw new FailedToTerminateProcessException();]]></code>
-      <code><![CDATA[throw new ProcessIsNotRunningException();]]></code>
-    </MissingThrowsDocblock>
-    <MixedArgument>
-      <code><![CDATA[$signal]]></code>
-    </MixedArgument>
+    <InvalidConstantAssignmentValue>
+      <code><![CDATA[PIPES = []]]></code>
+    </InvalidConstantAssignmentValue>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$pipes]]></code>
     </MixedArgumentTypeCoercion>
-    <UndefinedVariable>
-      <code><![CDATA[$signal]]></code>
-    </UndefinedVariable>
-  </file>
-  <file src="src/Result.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function exitCode(): int]]></code>
-      <code><![CDATA[public function stderr(): string]]></code>
-      <code><![CDATA[public function stdout(): string]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="src/Runner.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function run(ProcessInterface $process, TaskInterface ...$tasks): ResultInterface]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="src/Shell.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function execute(]]></code>
-    </MissingOverrideAttribute>
-    <MissingThrowsDocblock>
-      <code><![CDATA[throw new PcntlExtensionNotAvailableException();]]></code>
-      <code><![CDATA[throw new ProcOpenFunctionIsDisabledException();]]></code>
-      <code><![CDATA[throw new ProcOpenFunctionNotAvailableException();]]></code>
-      <code><![CDATA[write]]></code>
-    </MissingThrowsDocblock>
   </file>
   <file src="src/Status.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function command(): string]]></code>
-      <code><![CDATA[public function exitCode(): int]]></code>
-      <code><![CDATA[public function pid(): int]]></code>
-      <code><![CDATA[public function running(): bool]]></code>
-      <code><![CDATA[public function signaled(): bool]]></code>
-      <code><![CDATA[public function stopSignal(): int]]></code>
-      <code><![CDATA[public function stopped(): bool]]></code>
-      <code><![CDATA[public function terminateSignal(): int]]></code>
-    </MissingOverrideAttribute>
-    <MissingThrowsDocblock>
-      <code><![CDATA[throw new ProcessStoppedViaSignalException(code: $this->stopSignal);]]></code>
-      <code><![CDATA[throw new ProcessTerminatedViaSignalException(code: $this->terminateSignal);]]></code>
-    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code><![CDATA[new]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Stdio.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function close(): void]]></code>
-      <code><![CDATA[public function read(int $length = 4096): string]]></code>
-      <code><![CDATA[public function readLine(): string]]></code>
-      <code><![CDATA[public function stderr(): StderrInterface]]></code>
-      <code><![CDATA[public function stdin(): StdinInterface]]></code>
-      <code><![CDATA[public function stdout(): StdoutInterface]]></code>
-      <code><![CDATA[public function write(string $string): void]]></code>
-      <code><![CDATA[public function writeError(string $string): void]]></code>
-      <code><![CDATA[public function writeErrorLine(string $string): void]]></code>
-      <code><![CDATA[public function writeLine(string $string): void]]></code>
-    </MissingOverrideAttribute>
-    <MissingThrowsDocblock>
-      <code><![CDATA[Stderr::new($pipes[2])]]></code>
-      <code><![CDATA[Stderr::new($pipes[2])]]></code>
-      <code><![CDATA[Stdin::new($pipes[0])]]></code>
-      <code><![CDATA[Stdin::new($pipes[0])]]></code>
-      <code><![CDATA[Stdout::new($pipes[1])]]></code>
-      <code><![CDATA[Stdout::new($pipes[1])]]></code>
-      <code><![CDATA[close]]></code>
-      <code><![CDATA[close]]></code>
-      <code><![CDATA[close]]></code>
-      <code><![CDATA[read]]></code>
-      <code><![CDATA[write]]></code>
-      <code><![CDATA[write]]></code>
-      <code><![CDATA[write]]></code>
-      <code><![CDATA[write]]></code>
-    </MissingThrowsDocblock>
-  </file>
-  <file src="src/Task/CloseDescriptorTask.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function __invoke(DescriptorInterface $descriptor): void]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="src/Task/NoopTask.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function __invoke(DescriptorInterface $descriptor): void]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="src/Task/PipeDescriptorTask.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function __invoke(DescriptorInterface $descriptor): void]]></code>
-    </MissingOverrideAttribute>
-    <MissingThrowsDocblock>
-      <code><![CDATA[write]]></code>
-    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
   </file>
-  <file src="src/Task/ReadDescriptorTask.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function __invoke(DescriptorInterface $descriptor): void]]></code>
-    </MissingOverrideAttribute>
-  </file>
   <file src="src/Task/WriteDescriptorTask.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function __invoke(DescriptorInterface $descriptor): void]]></code>
-    </MissingOverrideAttribute>
-    <MissingThrowsDocblock>
-      <code><![CDATA[write]]></code>
-    </MissingThrowsDocblock>
     <PossiblyUnusedMethod>
       <code><![CDATA[__construct]]></code>
     </PossiblyUnusedMethod>
@@ -201,34 +56,12 @@
     <DocblockTypeContradiction>
       <code><![CDATA[is_resource($stream)]]></code>
     </DocblockTypeContradiction>
-    <InvalidPropertyAssignment>
-      <code><![CDATA[$this]]></code>
-      <code><![CDATA[$this]]></code>
-      <code><![CDATA[$this]]></code>
-    </InvalidPropertyAssignment>
-    <LessSpecificImplementedReturnType>
-      <code><![CDATA[mixed]]></code>
-    </LessSpecificImplementedReturnType>
-    <MissingOverrideAttribute>
-      <code><![CDATA[final public function close(): void]]></code>
-      <code><![CDATA[final public function isRunning(): bool]]></code>
-      <code><![CDATA[final public function toString(): string]]></code>
-      <code><![CDATA[public function detach(): mixed]]></code>
-      <code><![CDATA[public function read(int $length = DescriptorInterface::LENGTH): string]]></code>
-      <code><![CDATA[public function readLine(): string]]></code>
-      <code><![CDATA[public function write(string $bytes): int]]></code>
-    </MissingOverrideAttribute>
-    <MissingThrowsDocblock>
-      <code><![CDATA[assertIsResource]]></code>
-      <code><![CDATA[assertIsResource]]></code>
-      <code><![CDATA[assertIsResource]]></code>
-      <code><![CDATA[assertIsResource]]></code>
-      <code><![CDATA[assertIsResource]]></code>
-      <code><![CDATA[close]]></code>
-      <code><![CDATA[throw new FailedToReadFromStreamException();]]></code>
-      <code><![CDATA[throw new FailedToReadFromStreamException();]]></code>
-      <code><![CDATA[throw new FailedToWriteToStreamException();]]></code>
-    </MissingThrowsDocblock>
+    <InvalidArgument>
+      <code><![CDATA[$this->stream]]></code>
+    </InvalidArgument>
+    <MoreSpecificReturnType>
+      <code><![CDATA[positive-int]]></code>
+    </MoreSpecificReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[getMetadata]]></code>
       <code><![CDATA[getMetadata]]></code>
@@ -238,16 +71,8 @@
       <code><![CDATA[getSize]]></code>
     </PossiblyUnusedMethod>
     <RedundantConditionGivenDocblockType>
-      <code><![CDATA[assertIsResource]]></code>
+      <code><![CDATA[assertIsReadable]]></code>
     </RedundantConditionGivenDocblockType>
-  </file>
-  <file src="src/WorkingDirectory.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function toString(): string]]></code>
-    </MissingOverrideAttribute>
-    <MissingThrowsDocblock>
-      <code><![CDATA[throw new InvalidWorkingDirectoryException();]]></code>
-    </MissingThrowsDocblock>
   </file>
   <file src="tests/Unit/CommandTest.php">
     <InvalidReturnType>
