@@ -13,6 +13,7 @@ use Ghostwriter\Shell\Interface\EnvironmentVariablesInterface;
 use Ghostwriter\Shell\Interface\ProcessInterface;
 use Ghostwriter\Shell\Interface\StdioInterface;
 use Ghostwriter\Shell\Interface\WorkingDirectoryInterface;
+use Override;
 
 use function is_resource;
 use function proc_close;
@@ -32,6 +33,9 @@ final readonly class Process implements ProcessInterface
         2 => ['pipe', 'w+b'], // stderr
     ];
 
+    /** @var array{0:resource,1:resource,2:resource} */
+    public const array PIPES = [];
+
     /**
      * @param closed-resource|resource $stream
      */
@@ -43,6 +47,9 @@ final readonly class Process implements ProcessInterface
         private WorkingDirectoryInterface $workingDirectory,
     ) {}
 
+    /**
+     * @throws FailedToTerminateProcessException
+     */
     public function __destruct()
     {
         $this->stdio->close();
@@ -51,11 +58,16 @@ final readonly class Process implements ProcessInterface
             return;
         }
 
+        $signal = 15;
         if (! proc_terminate($this->stream, $signal)) {
             throw new FailedToTerminateProcessException();
         }
     }
 
+    /**
+     * @throws ProcessIsNotRunningException
+     */
+    #[Override]
     public function close(): int
     {
         if (! is_resource($this->stream)) {
@@ -65,21 +77,25 @@ final readonly class Process implements ProcessInterface
         return proc_close($this->stream);
     }
 
+    #[Override]
     public function command(): CommandInterface
     {
         return $this->command;
     }
 
+    #[Override]
     public function environmentVariables(): EnvironmentVariablesInterface
     {
         return $this->environmentVariables;
     }
 
+    #[Override]
     public function stdio(): StdioInterface
     {
         return $this->stdio;
     }
 
+    #[Override]
     public function workingDirectory(): WorkingDirectoryInterface
     {
         return $this->workingDirectory;
@@ -91,13 +107,12 @@ final readonly class Process implements ProcessInterface
         EnvironmentVariablesInterface $environmentVariables,
     ): self {
         set_error_handler(
-            static function (int $severity, string $message): void {
+            static function (int $severity, string $message): never {
                 throw new FailedToExecuteCommandException($message, $severity);
             }
         );
 
-        /** @var array{0:resource,1:resource,2:resource} $pipes */
-        $pipes = [];
+        $pipes = self::PIPES;
 
         try {
             $stream = proc_open(
@@ -111,11 +126,7 @@ final readonly class Process implements ProcessInterface
             restore_error_handler();
         }
 
-        if ($stream === false) {
-            throw new FailedToOpenProcessException();
-        }
-
-        return new self(
+        return $stream === false ? throw new FailedToOpenProcessException() : new self(
             command: $command,
             environmentVariables: $environmentVariables,
             stdio: Stdio::new($pipes),
