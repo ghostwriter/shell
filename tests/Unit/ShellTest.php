@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\ShellTests\Unit;
+namespace Tests\Unit;
 
 use Generator;
 use Ghostwriter\Shell\Command;
@@ -17,6 +17,7 @@ use Ghostwriter\Shell\Runner;
 use Ghostwriter\Shell\Shell;
 use Ghostwriter\Shell\Status;
 use Ghostwriter\Shell\Stdio;
+use Ghostwriter\Shell\StringBuffer;
 use Ghostwriter\Shell\Task\CloseDescriptorTask;
 use Ghostwriter\Shell\Task\ReadDescriptorTask;
 use Ghostwriter\Shell\Trait\DescriptorTrait;
@@ -44,6 +45,7 @@ use const PHP_BINARY;
 #[CoversClass(Shell::class)]
 #[CoversClass(Status::class)]
 #[CoversClass(Stdio::class)]
+#[CoversClass(StringBuffer::class)]
 #[CoversClass(WorkingDirectory::class)]
 final class ShellTest extends TestCase
 {
