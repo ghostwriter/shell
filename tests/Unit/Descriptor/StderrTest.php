@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\ShellTests\Unit\Descriptor;
+namespace Tests\Unit\Descriptor;
 
 use Ghostwriter\Shell\Descriptor\Stderr;
 use PHPUnit\Framework\Attributes\CoversClass;
