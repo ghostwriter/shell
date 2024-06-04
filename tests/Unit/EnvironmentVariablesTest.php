@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\ShellTests\Unit;
+namespace Tests\Unit;
 
 use Generator;
 use Ghostwriter\Shell\EnvironmentVariables;
