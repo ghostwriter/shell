@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Ghostwriter\Shell;
 
 use Ghostwriter\Shell\Interface\EnvironmentVariablesInterface;
+use Override;
 
 use function getenv;
 
@@ -20,6 +21,7 @@ final readonly class EnvironmentVariables implements EnvironmentVariablesInterfa
     /**
      * @return array<string,string>
      */
+    #[Override]
     public function toArray(): array
     {
         return $this->environmentVariables;
