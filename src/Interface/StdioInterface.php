@@ -22,11 +22,11 @@ interface StdioInterface
 
     public function stdout(): StdoutInterface;
 
-    public function write(string $string): void;
+    public function write(string $string): int;
 
-    public function writeError(string $string): void;
+    public function writeError(string $string): int;
 
-    public function writeErrorLine(string $string): void;
+    public function writeErrorLine(string $string): int;
 
-    public function writeLine(string $string): void;
+    public function writeLine(string $string): int;
 }
