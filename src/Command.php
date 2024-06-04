@@ -8,6 +8,7 @@ use Ghostwriter\Shell\Exception\CommandArgumentCannotBeEmptyException;
 use Ghostwriter\Shell\Exception\CommandNameCannotBeEmptyException;
 use Ghostwriter\Shell\Exception\NullPointerException;
 use Ghostwriter\Shell\Interface\CommandInterface;
+use Override;
 
 use function str_contains;
 use function trim;
@@ -16,6 +17,10 @@ final readonly class Command implements CommandInterface
 {
     /**
      * @param list<string> $arguments
+     *
+     * @throws CommandNameCannotBeEmptyException
+     * @throws CommandArgumentCannotBeEmptyException
+     * @throws NullPointerException
      */
     public function __construct(
         private string $name,
@@ -39,11 +44,13 @@ final readonly class Command implements CommandInterface
     /**
      * @return list<string>
      */
+    #[Override]
     public function arguments(): array
     {
         return $this->arguments;
     }
 
+    #[Override]
     public function name(): string
     {
         return $this->name;
@@ -52,6 +59,7 @@ final readonly class Command implements CommandInterface
     /**
      * @return list<string>
      */
+    #[Override]
     public function toArray(): array
     {
         return [$this->name, ...$this->arguments];
@@ -59,6 +67,10 @@ final readonly class Command implements CommandInterface
 
     /**
      * @param list<string> $arguments
+     *
+     * @throws CommandNameCannotBeEmptyException
+     * @throws CommandArgumentCannotBeEmptyException
+     * @throws NullPointerException
      */
     public static function new(string $command, array $arguments = []): self
     {
