@@ -23,20 +23,21 @@ use Ghostwriter\Shell\Task\ReadDescriptorTask;
 use Ghostwriter\Shell\Trait\DescriptorTrait;
 use Ghostwriter\Shell\WorkingDirectory;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversTrait;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Throwable;
+
+use const PHP_BINARY;
 
 use function func_get_args;
 use function getcwd;
 use function putenv;
 use function sys_get_temp_dir;
 
-use const PHP_BINARY;
-
 #[CoversClass(CloseDescriptorTask::class)]
 #[CoversClass(Command::class)]
-#[CoversClass(DescriptorTrait::class)]
+#[CoversTrait(DescriptorTrait::class)]
 #[CoversClass(EnvironmentVariables::class)]
 #[CoversClass(Process::class)]
 #[CoversClass(ReadDescriptorTask::class)]
