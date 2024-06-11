@@ -11,11 +11,7 @@ final class StringBuffer implements BufferInterface
 {
     public function __construct(
         private string $buffer
-    ) {}
-
-    public static function new(string $buffer = ''): self
-    {
-        return new self($buffer);
+    ) {
     }
 
     #[Override]
@@ -28,5 +24,10 @@ final class StringBuffer implements BufferInterface
     public function toString(): string
     {
         return $this->buffer;
+    }
+
+    public static function new(string $buffer = ''): self
+    {
+        return new self($buffer);
     }
 }
