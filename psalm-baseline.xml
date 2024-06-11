@@ -88,6 +88,9 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[$temp]]></code>
     </ArgumentTypeCoercion>
+    <InvalidArgument>
+      <code><![CDATA[DescriptorTrait::class]]></code>
+    </InvalidArgument>
     <MixedArgument>
       <code><![CDATA[func_get_args()]]></code>
       <code><![CDATA[func_get_args()]]></code>
