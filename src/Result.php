@@ -13,7 +13,8 @@ final readonly class Result implements ResultInterface
         private int $exitCode,
         private string $stdout,
         private string $stderr,
-    ) {}
+    ) {
+    }
 
     #[Override]
     public function exitCode(): int
