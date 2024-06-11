@@ -15,7 +15,8 @@ final readonly class PipeDescriptorTask implements TaskInterface
 {
     public function __construct(
         private DescriptorInterface $descriptor,
-    ) {}
+    ) {
+    }
 
     #[Override]
     public function __invoke(DescriptorInterface $descriptor): void
