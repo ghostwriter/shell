@@ -237,49 +237,6 @@ trait DescriptorTrait
     }
 
     /**
-     * @psalm-assert-if-true non-empty-string $bytes
-     *
-     * @throws EmptyStringException
-     */
-    private function assertNotEmpty(string $bytes): void
-    {
-        if (trim($bytes) === '') {
-            throw new EmptyStringException();
-        }
-    }
-
-    /**
-     * @psalm-assert resource $this->stream
-     *
-     * @psalm-this-out resource $this->resource
-     *
-     * @throws StreamIsNotResourceException
-     */
-    private function assertIsResource(): void
-    {
-        if (! is_resource($this->stream)) {
-            throw new StreamIsNotResourceException();
-        }
-    }
-
-    /**
-     * @psalm-assert resource $this->stream
-     *
-     * @psalm-this-out resource $this->resource
-     *
-     * @throws FailedToSetStreamBlockingException
-     * @throws StreamIsNotResourceException
-     */
-    private function assertNonBlockingResource(): void
-    {
-        $this->assertIsResource();
-
-        if (! stream_set_blocking($this->stream, false)) {
-            throw new FailedToSetStreamBlockingException();
-        }
-    }
-
-    /**
      * @psalm-assert resource $this->stream
      *
      * @throws StreamIsNotReadableException
@@ -310,6 +267,20 @@ trait DescriptorTrait
      * @psalm-this-out resource $this->resource
      *
      * @throws StreamIsNotResourceException
+     */
+    private function assertIsResource(): void
+    {
+        if (! is_resource($this->stream)) {
+            throw new StreamIsNotResourceException();
+        }
+    }
+
+    /**
+     * @psalm-assert resource $this->stream
+     *
+     * @psalm-this-out resource $this->resource
+     *
+     * @throws StreamIsNotResourceException
      * @throws StreamIsNotWritableException
      */
     private function assertIsWritable(): void
@@ -318,6 +289,35 @@ trait DescriptorTrait
 
         if (! is_writable($this->stream)) {
             throw new StreamIsNotWritableException();
+        }
+    }
+
+    /**
+     * @psalm-assert resource $this->stream
+     *
+     * @psalm-this-out resource $this->resource
+     *
+     * @throws FailedToSetStreamBlockingException
+     * @throws StreamIsNotResourceException
+     */
+    private function assertNonBlockingResource(): void
+    {
+        $this->assertIsResource();
+
+        if (! stream_set_blocking($this->stream, false)) {
+            throw new FailedToSetStreamBlockingException();
+        }
+    }
+
+    /**
+     * @psalm-assert-if-true non-empty-string $bytes
+     *
+     * @throws EmptyStringException
+     */
+    private function assertNotEmpty(string $bytes): void
+    {
+        if (trim($bytes) === '') {
+            throw new EmptyStringException();
         }
     }
 
