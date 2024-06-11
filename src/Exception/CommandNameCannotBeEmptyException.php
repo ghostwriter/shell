@@ -7,4 +7,6 @@ namespace Ghostwriter\Shell\Exception;
 use Ghostwriter\Shell\Interface\ExceptionInterface;
 use RuntimeException;
 
-final class CommandNameCannotBeEmptyException extends RuntimeException implements ExceptionInterface {}
+final class CommandNameCannotBeEmptyException extends RuntimeException implements ExceptionInterface
+{
+}
