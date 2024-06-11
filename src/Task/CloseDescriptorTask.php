@@ -7,8 +7,8 @@ namespace Ghostwriter\Shell\Task;
 use Fiber;
 use Ghostwriter\Shell\Interface\DescriptorInterface;
 use Ghostwriter\Shell\Interface\TaskInterface;
-use Throwable;
 use Override;
+use Throwable;
 
 final class CloseDescriptorTask implements TaskInterface
 {
