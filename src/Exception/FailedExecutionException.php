@@ -7,4 +7,6 @@ namespace Ghostwriter\Shell\Exception;
 use Ghostwriter\Shell\Interface\ExceptionInterface;
 use RuntimeException;
 
-final class FailedExecutionException extends RuntimeException implements ExceptionInterface {}
+final class FailedExecutionException extends RuntimeException implements ExceptionInterface
+{
+}
