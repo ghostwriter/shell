@@ -6,4 +6,6 @@ namespace Ghostwriter\Shell\Interface\Stdio;
 
 use Ghostwriter\Shell\Interface\DescriptorInterface;
 
-interface StdoutInterface extends DescriptorInterface {}
+interface StdoutInterface extends DescriptorInterface
+{
+}
