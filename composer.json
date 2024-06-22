@@ -33,8 +33,7 @@
     ],
     "_comment": "#BlackLivesMatter",
     "require": {
-        "php": ">=8.3",
-        "ext-pcntl": "*"
+        "php": ">=8.3"
     },
     "require-dev": {
         "ghostwriter/coding-standard": "dev-main"
