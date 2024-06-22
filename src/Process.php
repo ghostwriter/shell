@@ -14,6 +14,7 @@ use Ghostwriter\Shell\Interface\ProcessInterface;
 use Ghostwriter\Shell\Interface\StdioInterface;
 use Ghostwriter\Shell\Interface\WorkingDirectoryInterface;
 use Override;
+use Throwable;
 
 use function is_resource;
 use function proc_close;
@@ -102,6 +103,9 @@ final readonly class Process implements ProcessInterface
         return $this->workingDirectory;
     }
 
+    /**
+     * @throws Throwable
+     */
     public static function new(
         CommandInterface $command,
         WorkingDirectoryInterface $workingDirectory,
