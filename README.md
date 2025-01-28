@@ -3,8 +3,6 @@
 [![Automation](https://github.com/ghostwriter/shell/actions/workflows/automation.yml/badge.svg)](https://github.com/ghostwriter/shell/actions/workflows/automation.yml)
 [![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/shell?color=8892bf)](https://www.php.net/supported-versions)
 [![GitHub Sponsors](https://img.shields.io/github/sponsors/ghostwriter?label=Sponsor+@ghostwriter/shell&logo=GitHub+Sponsors)](https://github.com/sponsors/ghostwriter)
-[![Code Coverage](https://codecov.io/gh/ghostwriter/shell/branch/main/graph/badge.svg)](https://codecov.io/gh/ghostwriter/shell)
-[![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/shell)](https://packagist.org/packages/ghostwriter/shell)
 [![Downloads](https://badgen.net/packagist/dt/ghostwriter/shell?color=blue)](https://packagist.org/packages/ghostwriter/shell)
 
 Execute commands and external programs
