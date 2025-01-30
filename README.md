@@ -1,8 +1,8 @@
 # Shell
 
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/ghostwriter?label=Sponsor+@ghostwriter/shell&logo=GitHub+Sponsors)](https://github.com/sponsors/ghostwriter)
 [![Automation](https://github.com/ghostwriter/shell/actions/workflows/automation.yml/badge.svg)](https://github.com/ghostwriter/shell/actions/workflows/automation.yml)
 [![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/shell?color=8892bf)](https://www.php.net/supported-versions)
-[![GitHub Sponsors](https://img.shields.io/github/sponsors/ghostwriter?label=Sponsor+@ghostwriter/shell&logo=GitHub+Sponsors)](https://github.com/sponsors/ghostwriter)
 [![Downloads](https://badgen.net/packagist/dt/ghostwriter/shell?color=blue)](https://packagist.org/packages/ghostwriter/shell)
 
 Execute commands and external programs
