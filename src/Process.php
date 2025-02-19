@@ -46,7 +46,43 @@ final readonly class Process implements ProcessInterface
         private StdioInterface $stdio,
         private mixed $stream,
         private WorkingDirectoryInterface $workingDirectory,
-    ) {
+    ) {}
+
+    /**
+     * @throws Throwable
+     */
+    public static function new(
+        CommandInterface $command,
+        WorkingDirectoryInterface $workingDirectory,
+        EnvironmentVariablesInterface $environmentVariables,
+    ): self {
+        set_error_handler(
+            static function (int $severity, string $message): never {
+                throw new FailedToExecuteCommandException($message, $severity);
+            }
+        );
+
+        $pipes = self::PIPES;
+
+        try {
+            $stream = proc_open(
+                $command->toArray(),
+                self::DESCRIPTORS,
+                $pipes,
+                $workingDirectory->toString(),
+                $environmentVariables->toArray()
+            );
+        } finally {
+            restore_error_handler();
+        }
+
+        return false === $stream ? throw new FailedToOpenProcessException() : new self(
+            command: $command,
+            environmentVariables: $environmentVariables,
+            stdio: Stdio::new($pipes),
+            stream: $stream,
+            workingDirectory: $workingDirectory,
+        );
     }
 
     /**
@@ -101,42 +137,5 @@ final readonly class Process implements ProcessInterface
     public function workingDirectory(): WorkingDirectoryInterface
     {
         return $this->workingDirectory;
-    }
-
-    /**
-     * @throws Throwable
-     */
-    public static function new(
-        CommandInterface $command,
-        WorkingDirectoryInterface $workingDirectory,
-        EnvironmentVariablesInterface $environmentVariables,
-    ): self {
-        set_error_handler(
-            static function (int $severity, string $message): never {
-                throw new FailedToExecuteCommandException($message, $severity);
-            }
-        );
-
-        $pipes = self::PIPES;
-
-        try {
-            $stream = proc_open(
-                $command->toArray(),
-                self::DESCRIPTORS,
-                $pipes,
-                $workingDirectory->toString(),
-                $environmentVariables->toArray()
-            );
-        } finally {
-            restore_error_handler();
-        }
-
-        return $stream === false ? throw new FailedToOpenProcessException() : new self(
-            command: $command,
-            environmentVariables: $environmentVariables,
-            stdio: Stdio::new($pipes),
-            stream: $stream,
-            workingDirectory: $workingDirectory,
-        );
     }
 }
