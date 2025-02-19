@@ -11,5 +11,5 @@ interface RunnerInterface
     /**
      * @throws Throwable
      */
-    public function run(ProcessInterface $process, TaskInterface ...$tasks): ResultInterface;
+    public function run(ProcessInterface $process, TaskInterface ...$task): ResultInterface;
 }
