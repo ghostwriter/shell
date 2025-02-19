@@ -37,7 +37,6 @@ use function sys_get_temp_dir;
 
 #[CoversClass(CloseDescriptorTask::class)]
 #[CoversClass(Command::class)]
-#[CoversTrait(DescriptorTrait::class)]
 #[CoversClass(EnvironmentVariables::class)]
 #[CoversClass(Process::class)]
 #[CoversClass(ReadDescriptorTask::class)]
@@ -48,6 +47,7 @@ use function sys_get_temp_dir;
 #[CoversClass(Stdio::class)]
 #[CoversClass(StringBuffer::class)]
 #[CoversClass(WorkingDirectory::class)]
+#[CoversTrait(DescriptorTrait::class)]
 final class ShellTest extends TestCase
 {
     /**
