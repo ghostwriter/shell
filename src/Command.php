@@ -10,8 +10,8 @@ use Ghostwriter\Shell\Exception\NullPointerException;
 use Ghostwriter\Shell\Interface\CommandInterface;
 use Override;
 
+use function mb_trim;
 use function str_contains;
-use function trim;
 
 final readonly class Command implements CommandInterface
 {
@@ -26,7 +26,7 @@ final readonly class Command implements CommandInterface
         private string $name,
         private array $arguments
     ) {
-        if (trim($name) === '') {
+        if (mb_trim($name) === '') {
             throw new CommandNameCannotBeEmptyException();
         }
 
@@ -35,10 +35,22 @@ final readonly class Command implements CommandInterface
                 throw new NullPointerException();
             }
 
-            if (trim($argument) === '') {
+            if (mb_trim($argument) === '') {
                 throw new CommandArgumentCannotBeEmptyException();
             }
         }
+    }
+
+    /**
+     * @param list<string> $arguments
+     *
+     * @throws CommandNameCannotBeEmptyException
+     * @throws CommandArgumentCannotBeEmptyException
+     * @throws NullPointerException
+     */
+    public static function new(string $command, array $arguments = []): self
+    {
+        return new self($command, $arguments);
     }
 
     /**
@@ -63,17 +75,5 @@ final readonly class Command implements CommandInterface
     public function toArray(): array
     {
         return [$this->name, ...$this->arguments];
-    }
-
-    /**
-     * @param list<string> $arguments
-     *
-     * @throws CommandNameCannotBeEmptyException
-     * @throws CommandArgumentCannotBeEmptyException
-     * @throws NullPointerException
-     */
-    public static function new(string $command, array $arguments = []): self
-    {
-        return new self($command, $arguments);
     }
 }
