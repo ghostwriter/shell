@@ -7,6 +7,4 @@ namespace Ghostwriter\Shell\Exception;
 use Ghostwriter\Shell\Interface\ExceptionInterface;
 use RuntimeException;
 
-final class NullPointerException extends RuntimeException implements ExceptionInterface
-{
-}
+final class NullPointerException extends RuntimeException implements ExceptionInterface {}
