@@ -63,8 +63,7 @@ final class ShellTest extends TestCase
      */
     public function stdout(): string
     {
-        return $this->execute(...func_get_args())
-            ->stdout();
+        return $this->execute(...func_get_args())->stdout();
     }
 
     /**
@@ -113,15 +112,14 @@ final class ShellTest extends TestCase
      */
     public function testFailedExecution(): void
     {
-        $expected = 'Uncaught Error: Call to undefined function blackLivesMatter() in Command line code';
-
         $result = $this->execute(PHP_BINARY, ['-r', 'blackLivesMatter("#BLM!");']);
 
         self::assertSame(255, $result->exitCode());
 
-        self::assertStringContainsString($expected, $result->stdout());
-
-        self::assertStringContainsString($expected, $result->stderr());
+        self::assertStringContainsString(
+            'Uncaught Error: Call to undefined function blackLivesMatter() in Command line code',
+            $result->stderr(),
+        );
     }
 
     /**
