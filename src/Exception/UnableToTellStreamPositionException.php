@@ -7,6 +7,4 @@ namespace Ghostwriter\Shell\Exception;
 use Ghostwriter\Shell\Interface\ExceptionInterface;
 use RuntimeException;
 
-final class UnableToTellStreamPositionException extends RuntimeException implements ExceptionInterface
-{
-}
+final class UnableToTellStreamPositionException extends RuntimeException implements ExceptionInterface {}
