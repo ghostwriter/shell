@@ -52,7 +52,7 @@
             "Tests\\Unit\\": "tests/Unit/"
         },
         "exclude-from-classmap": [
-            "tests/fixture/"
+            "tests/Fixture/"
         ]
     },
     "config": {
