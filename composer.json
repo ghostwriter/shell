@@ -1,7 +1,7 @@
 {
     "name": "ghostwriter/shell",
     "description": "Execute commands and external programs",
-    "license": "BSD-3-Clause",
+    "license": "BSD-4-Clause",
     "type": "library",
     "keywords": [
         "ghostwriter",
