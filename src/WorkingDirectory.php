@@ -24,20 +24,20 @@ final readonly class WorkingDirectory implements WorkingDirectoryInterface
         }
     }
 
-    #[Override]
-    public function toString(): string
-    {
-        return $this->path;
-    }
-
     /**
      * @throws InvalidWorkingDirectoryException
      */
     public static function new(?string $workingDirectory = null): self
     {
         return new self(match (true) {
-            $workingDirectory === null => getcwd(),
+            null === $workingDirectory => getcwd(),
             default => $workingDirectory,
         });
+    }
+
+    #[Override]
+    public function toString(): string
+    {
+        return $this->path;
     }
 }

@@ -43,7 +43,7 @@ final readonly class Shell implements ShellInterface
 
         $disableFunctions = ini_get('disable_functions');
 
-        if ($disableFunctions !== false) {
+        if (false !== $disableFunctions) {
             $disabledFunctions = explode(',', $disableFunctions);
 
             if (in_array('proc_open', $disabledFunctions, true)) {
@@ -52,9 +52,17 @@ final readonly class Shell implements ShellInterface
         }
     }
 
-    public function __destruct()
+    /**
+     * @throws PcntlExtensionNotAvailableException
+     * @throws ProcOpenFunctionIsDisabledException
+     * @throws ProcOpenFunctionNotAvailableException
+     */
+    public static function new(): self
     {
+        return new self(Runner::new(before: new ReadDescriptorTask(), after: new CloseDescriptorTask()));
     }
+
+    public function __destruct() {}
 
     /**
      * @param list<string>              $arguments
@@ -76,7 +84,7 @@ final readonly class Shell implements ShellInterface
             EnvironmentVariables::new($environmentVariables)
         );
 
-        if ($input !== null) {
+        if (null !== $input) {
             (static function (StdinInterface $stdin, string $input): void {
                 $stdin->write($input);
                 $stdin->close();
@@ -84,15 +92,5 @@ final readonly class Shell implements ShellInterface
         }
 
         return $this->runner->run($process);
-    }
-
-    /**
-     * @throws PcntlExtensionNotAvailableException
-     * @throws ProcOpenFunctionIsDisabledException
-     * @throws ProcOpenFunctionNotAvailableException
-     */
-    public static function new(): self
-    {
-        return new self(Runner::new(before: new ReadDescriptorTask(), after: new CloseDescriptorTask()));
     }
 }

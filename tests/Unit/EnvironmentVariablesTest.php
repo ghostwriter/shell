@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 use function getenv;
 use function putenv;
+use function sprintf;
 
 #[CoversClass(EnvironmentVariables::class)]
 final class EnvironmentVariablesTest extends TestCase
@@ -24,7 +25,7 @@ final class EnvironmentVariablesTest extends TestCase
         $key = 'BLM';
         $value = 'BlackLivesMatter';
 
-        putenv("{$key}={$value}");
+        putenv(sprintf('%s=%s', $key, $value));
         $_ENV[$key] = $_SERVER[$key] = $value;
 
         yield from [
@@ -37,7 +38,7 @@ final class EnvironmentVariablesTest extends TestCase
             'getenv()' => [getenv()],
         ];
 
-        putenv("{$key}");
+        putenv($key);
         unset($_ENV[$key], $_SERVER[$key]);
     }
 
