@@ -20,7 +20,13 @@ final readonly class Runner implements RunnerInterface
     public function __construct(
         private TaskInterface $before,
         private TaskInterface $after
-    ) {
+    ) {}
+
+    public static function new(
+        TaskInterface $before = new NoopTask(),
+        TaskInterface $after = new NoopTask()
+    ): self {
+        return new self(before: $before, after: $after);
     }
 
     #[Override]
@@ -66,12 +72,5 @@ final readonly class Runner implements RunnerInterface
         }
 
         return Result::new($process->close(), $stdout->toString(), $stderr->toString());
-    }
-
-    public static function new(
-        TaskInterface $before = new NoopTask(),
-        TaskInterface $after = new NoopTask()
-    ): self {
-        return new self(before: $before, after: $after);
     }
 }

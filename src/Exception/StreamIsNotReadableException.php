@@ -7,6 +7,4 @@ namespace Ghostwriter\Shell\Exception;
 use Ghostwriter\Shell\Interface\ExceptionInterface;
 use RuntimeException;
 
-final class StreamIsNotReadableException extends RuntimeException implements ExceptionInterface
-{
-}
+final class StreamIsNotReadableException extends RuntimeException implements ExceptionInterface {}
