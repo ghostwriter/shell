@@ -16,7 +16,14 @@ final readonly class EnvironmentVariables implements EnvironmentVariablesInterfa
      */
     public function __construct(
         private array $environmentVariables,
-    ) {
+    ) {}
+
+    /**
+     * @param null|array<string,string> $environmentVariables
+     */
+    public static function new(?array $environmentVariables = null): self
+    {
+        return new self($environmentVariables ?? getenv() ?: []);
     }
 
     /**
@@ -26,13 +33,5 @@ final readonly class EnvironmentVariables implements EnvironmentVariablesInterfa
     public function toArray(): array
     {
         return $this->environmentVariables;
-    }
-
-    /**
-     * @param null|array<string,string> $environmentVariables
-     */
-    public static function new(?array $environmentVariables = null): self
-    {
-        return new self($environmentVariables ?? getenv() ?: []);
     }
 }

@@ -7,6 +7,4 @@ namespace Ghostwriter\Shell\Exception;
 use Ghostwriter\Shell\Interface\ExceptionInterface;
 use RuntimeException;
 
-final class PcntlExtensionNotAvailableException extends RuntimeException implements ExceptionInterface
-{
-}
+final class PcntlExtensionNotAvailableException extends RuntimeException implements ExceptionInterface {}
