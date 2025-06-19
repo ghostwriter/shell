@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.2/phpunit.xsd"
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/sebastianbergmann/phpunit/12.2/phpunit.xsd"
     beStrictAboutChangesToGlobalState="true"
     beStrictAboutCoverageMetadata="true"
     beStrictAboutOutputDuringTests="true"
@@ -8,13 +9,15 @@
     cacheDirectory=".cache/phpunit"
     cacheResult="false"
     colors="true"
+    displayDetailsOnAllIssues="true"
     displayDetailsOnIncompleteTests="true"
+    displayDetailsOnPhpunitDeprecations="true"
     displayDetailsOnSkippedTests="true"
     displayDetailsOnTestsThatTriggerDeprecations="true"
     displayDetailsOnTestsThatTriggerErrors="true"
     displayDetailsOnTestsThatTriggerNotices="true"
     displayDetailsOnTestsThatTriggerWarnings="true"
-    executionOrder="depends,defects"
+    executionOrder="depends,random"
     failOnDeprecation="true"
     failOnEmptyTestSuite="true"
     failOnIncomplete="true"
@@ -23,15 +26,17 @@
     failOnSkipped="true"
     failOnWarning="true"
     requireCoverageMetadata="true"
-    stopOnFailure="true"
 >
-    <coverage>
+    <coverage pathCoverage="true" disableCodeCoverageIgnore="true">
         <report>
-            <html outputDirectory=".cache/phpunit/coverage-html" />
-            <clover outputFile=".cache/phpunit/clover.xml" />
-            <text outputFile=".cache/phpunit/coverage.txt" />
+            <html outputDirectory=".cache/phpunit/coverage-html"/>
+            <clover outputFile=".cache/phpunit/clover.xml"/>
+            <text outputFile=".cache/phpunit/coverage.txt"/>
         </report>
     </coverage>
+    <logging>
+        <junit outputFile=".cache/phpunit/junit.xml"/>
+    </logging>
     <source ignoreIndirectDeprecations="true" restrictNotices="true" restrictWarnings="true">
         <include>
             <directory>src</directory>
@@ -39,7 +44,7 @@
     </source>
     <testsuites>
         <testsuite name="default">
-            <directory>tests</directory>
+            <directory>tests/Unit</directory>
             <exclude>tests/Fixture</exclude>
         </testsuite>
     </testsuites>

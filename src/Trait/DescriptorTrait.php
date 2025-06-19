@@ -27,11 +27,11 @@ use function fstat;
 use function fwrite;
 use function is_resource;
 use function is_writable;
+use function mb_trim;
 use function str_contains;
 use function stream_get_contents;
 use function stream_get_meta_data;
 use function stream_set_blocking;
-use function trim;
 
 trait DescriptorTrait
 {
@@ -49,6 +49,26 @@ trait DescriptorTrait
     }
 
     /**
+     * @param resource $stream
+     *
+     * @throws StreamIsNotResourceException
+     * @throws FailedToSetStreamBlockingException
+     */
+    public static function new(mixed $stream): self
+    {
+        if (! is_resource($stream)) {
+            throw new StreamIsNotResourceException();
+        }
+
+        //        $meta = stream_get_meta_data($resourceOrStream);
+        //        $mode = $meta['mode'] ?? '';
+        //        $read = str_contains($mode, 'r');
+        //        $plus = str_contains($mode, '+');
+
+        return new self($stream, StringBuffer::new());
+    }
+
+    /**
      * @throws FailedToClosePipeException
      */
     public function __destruct()
@@ -62,7 +82,7 @@ trait DescriptorTrait
     #[Override]
     final public function close(): void
     {
-        if ($this->stream === null) {
+        if (null === $this->stream) {
             return;
         }
 
@@ -117,7 +137,7 @@ trait DescriptorTrait
 
         $meta = stream_get_meta_data($this->stream);
 
-        if ($key === null) {
+        if (null === $key) {
             return $meta;
         }
 
@@ -135,7 +155,7 @@ trait DescriptorTrait
         }
 
         $stats = fstat($this->stream);
-        if ($stats === false) {
+        if (false === $stats) {
             return null;
         }
 
@@ -163,7 +183,7 @@ trait DescriptorTrait
         $this->assertIsReadable();
 
         $bytesRead = fread($this->stream, $length);
-        if ($bytesRead === false) {
+        if (false === $bytesRead) {
             throw new FailedToReadFromStreamException();
         }
 
@@ -182,7 +202,7 @@ trait DescriptorTrait
         $this->assertIsResource();
 
         $bytesRead = fgets($this->stream);
-        if ($bytesRead === false) {
+        if (false === $bytesRead) {
             throw new FailedToReadFromStreamException();
         }
 
@@ -199,14 +219,14 @@ trait DescriptorTrait
     #[Override]
     final public function toString(): string
     {
-        if ($this->stream === null) {
+        if (null === $this->stream) {
             return $this->buffer->toString();
         }
 
         $this->assertIsReadable();
 
         $contents = stream_get_contents($this->stream);
-        if ($contents === false) {
+        if (false === $contents) {
             throw new FailedToReadFromStreamException();
         }
 
@@ -229,7 +249,7 @@ trait DescriptorTrait
         $this->assertIsWritable();
 
         $bytesWritten = fwrite($this->stream, $bytes);
-        if ($bytesWritten === false) {
+        if (false === $bytesWritten) {
             throw new FailedToWriteToStreamException();
         }
 
@@ -316,28 +336,8 @@ trait DescriptorTrait
      */
     private function assertNotEmpty(string $bytes): void
     {
-        if (trim($bytes) === '') {
+        if (mb_trim($bytes) === '') {
             throw new EmptyStringException();
         }
-    }
-
-    /**
-     * @param resource $stream
-     *
-     * @throws StreamIsNotResourceException
-     * @throws FailedToSetStreamBlockingException
-     */
-    public static function new(mixed $stream): self
-    {
-        if (! is_resource($stream)) {
-            throw new StreamIsNotResourceException();
-        }
-
-        //        $meta = stream_get_meta_data($resourceOrStream);
-        //        $mode = $meta['mode'] ?? '';
-        //        $read = str_contains($mode, 'r');
-        //        $plus = str_contains($mode, '+');
-
-        return new self($stream, StringBuffer::new());
     }
 }
