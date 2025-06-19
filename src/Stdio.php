@@ -22,7 +22,20 @@ final readonly class Stdio implements StdioInterface
         private StdinInterface $stdin,
         private StdoutInterface $stdout,
         private StderrInterface $stderr,
-    ) {
+    ) {}
+
+    /**
+     * @param array{0:resource,1:resource,2:resource} $pipes
+     *
+     * @throws Throwable
+     */
+    public static function new(array $pipes): self
+    {
+        return new self(
+            stdin: Stdin::new($pipes[0]),
+            stdout: Stdout::new($pipes[1]),
+            stderr: Stderr::new($pipes[2]),
+        );
     }
 
     /**
@@ -117,19 +130,5 @@ final readonly class Stdio implements StdioInterface
     public function writeLine(string $string): int
     {
         return $this->stdout->write($string . PHP_EOL);
-    }
-
-    /**
-     * @param array{0:resource,1:resource,2:resource} $pipes
-     *
-     * @throws Throwable
-     */
-    public static function new(array $pipes): self
-    {
-        return new self(
-            stdin: Stdin::new($pipes[0]),
-            stdout: Stdout::new($pipes[1]),
-            stderr: Stderr::new($pipes[2]),
-        );
     }
 }

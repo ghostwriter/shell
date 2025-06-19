@@ -36,6 +36,28 @@ final readonly class Status implements StatusInterface
         }
     }
 
+    /**
+     * @param resource $process
+     *
+     * @throws ProcessStoppedViaSignalException
+     * @throws ProcessTerminatedViaSignalException
+     */
+    public static function new(mixed $process): self
+    {
+        $status = proc_get_status($process);
+
+        return new self(
+            $status['command'],
+            $status['exitcode'],
+            $status['pid'],
+            $status['running'],
+            $status['signaled'], // true -> termsig
+            $status['stopped'], // true -> stopsig
+            $status['stopsig'],
+            $status['termsig']
+        );
+    }
+
     #[Override]
     public function command(): string
     {
@@ -82,27 +104,5 @@ final readonly class Status implements StatusInterface
     public function terminateSignal(): int
     {
         return $this->terminateSignal;
-    }
-
-    /**
-     * @param resource $process
-     *
-     * @throws ProcessStoppedViaSignalException
-     * @throws ProcessTerminatedViaSignalException
-     */
-    public static function new(mixed $process): self
-    {
-        $status = proc_get_status($process);
-
-        return new self(
-            $status['command'],
-            $status['exitcode'],
-            $status['pid'],
-            $status['running'],
-            $status['signaled'], // true -> termsig
-            $status['stopped'], // true -> stopsig
-            $status['stopsig'],
-            $status['termsig']
-        );
     }
 }
