@@ -16,6 +16,7 @@ interface ProcessInterface
     public function stdio(): StdioInterface;
 
     public function workingDirectory(): WorkingDirectoryInterface;
+
     //    public function isRunning(): bool;
     //
     //    public function pid(): int;

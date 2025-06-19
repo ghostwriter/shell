@@ -13,7 +13,11 @@ final readonly class Result implements ResultInterface
         private int $exitCode,
         private string $stdout,
         private string $stderr,
-    ) {
+    ) {}
+
+    public static function new(int $exitCode, string $stdout, string $stderr): self
+    {
+        return new self($exitCode, $stdout, $stderr);
     }
 
     #[Override]
@@ -32,10 +36,5 @@ final readonly class Result implements ResultInterface
     public function stdout(): string
     {
         return $this->stdout;
-    }
-
-    public static function new(int $exitCode, string $stdout, string $stderr): self
-    {
-        return new self($exitCode, $stdout, $stderr);
     }
 }
