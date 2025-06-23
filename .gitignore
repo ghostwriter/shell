@@ -23,7 +23,6 @@ vendor/
 # Allow
 
 !.env.dist
-!.env.example
 !.env.me
 !.env.vault
 !.envrc
