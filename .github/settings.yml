@@ -3,7 +3,6 @@
   "description": "Execute commands and external programs"
   "homepage": "https://github.com/ghostwriter/shell"
   "topics": "ghostwriter, process, shell"
-  "private": false
   "has_issues": true
   "has_projects": false
   "has_wiki": false
