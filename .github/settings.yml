@@ -1,7 +1,4 @@
 "milestones":
-  - "title": "0.1.1"
-    "description": "Patch release – targeting 0.1.x branch (semantic version: 0.1.1)"
-    "state": "closed"
   - "title": "0.2.0"
     "description": "Minor release – targeting 0.2.x branch (semantic version: 0.2.0)"
     "state": "open"
@@ -11,6 +8,9 @@
   - "title": "0.1.2"
     "description": "Patch release – targeting 0.1.x branch (semantic version: 0.1.2)"
     "state": "open"
+  - "title": "0.1.1"
+    "description": "Patch release – targeting 0.1.x branch (semantic version: 0.1.1)"
+    "state": "closed"
 "repository":
   "name": "shell"
   "description": "Execute commands and external programs"
