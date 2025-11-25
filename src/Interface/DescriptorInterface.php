@@ -11,9 +11,7 @@ use RuntimeException;
 
 interface DescriptorInterface extends ReadableInterface, WritableInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     public const int LENGTH = 4096;
 
     /**
@@ -32,9 +30,7 @@ interface DescriptorInterface extends ReadableInterface, WritableInterface
      */
     public function detach(): mixed;
 
-    /**
-     * Returns whether the stream is open.
-     */
+    /** Returns whether the stream is open. */
     public function isRunning(): bool;
 
     /**

@@ -68,17 +68,13 @@ trait DescriptorTrait
         return new self($stream, StringBuffer::new());
     }
 
-    /**
-     * @throws FailedToClosePipeException
-     */
+    /** @throws FailedToClosePipeException */
     public function __destruct()
     {
         $this->close();
     }
 
-    /**
-     * @throws FailedToClosePipeException
-     */
+    /** @throws FailedToClosePipeException */
     #[Override]
     final public function close(): void
     {
@@ -97,9 +93,7 @@ trait DescriptorTrait
         }
     }
 
-    /**
-     * @return null|resource
-     */
+    /** @return null|resource */
     #[Override]
     final public function detach(): mixed
     {
@@ -115,7 +109,7 @@ trait DescriptorTrait
      * @throws StreamIsNotResourceException
      * @throws MissingStreamMetadataException
      *
-     * @return array{
+     * @return null|array{
      *      timed_out: bool,
      *      blocked: bool,
      *      eof: bool,
@@ -128,7 +122,7 @@ trait DescriptorTrait
      *      uri: string,
      *      crypto: array,
      *      mediatype: string
-     *   }|bool|mixed|null
+     *   }|bool|mixed
      *
      */
     final public function getMetadata(?string $key = null): mixed

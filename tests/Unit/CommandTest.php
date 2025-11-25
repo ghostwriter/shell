@@ -20,7 +20,7 @@ final class CommandTest extends TestCase
      * @param list<string>                  $arguments
      * @param list<class-string<Throwable>> $expectedExceptions
      */
-    #[DataProvider('dataProviderInvalid')]
+    #[DataProvider('provideInvalidCases')]
     public function testInvalid(string $name, array $arguments, array $expectedExceptions): void
     {
         foreach ($expectedExceptions as $expectedException) {
@@ -30,10 +30,8 @@ final class CommandTest extends TestCase
         Command::new($name, $arguments);
     }
 
-    /**
-     * @param list<string> $arguments
-     */
-    #[DataProvider('dataProvider')]
+    /** @param list<string> $arguments */
+    #[DataProvider('provideNewCases')]
     public function testNew(string $name, array $arguments): void
     {
         $command = Command::new($name, $arguments);
@@ -45,20 +43,16 @@ final class CommandTest extends TestCase
         self::assertSame([$name, ...$arguments], $command->toArray());
     }
 
-    /**
-     * @return Generator<array{0:string,1:list<string>}>
-     */
-    public static function dataProvider(): Generator
+    /** @return Generator<array{0:string,1:list<string>}> */
+    public static function provideNewCases(): iterable
     {
         yield from [
             'command' => ['command', ['argument-0', 'argument-1']],
         ];
     }
 
-    /**
-     * @return Generator<array{0:string,1:list<string>}>
-     */
-    public static function dataProviderInvalid(): Generator
+    /** @return Generator<array{0:string,1:list<string>}> */
+    public static function provideInvalidCases(): iterable
     {
         yield from [
             'empty-command' => ['', ['argument-0', 'argument-1'], [CommandNameCannotBeEmptyException::class]],

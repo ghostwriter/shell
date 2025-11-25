@@ -8,8 +8,6 @@ use Throwable;
 
 interface RunnerInterface
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function run(ProcessInterface $process, TaskInterface ...$task): ResultInterface;
 }
