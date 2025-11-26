@@ -84,6 +84,10 @@
             "container": {
                 "definition": "Ghostwriter\\Shell\\Container\\ShellDefinition"
             }
+        },
+        "thanks": {
+            "url": "https://github.com/ghostwriter/shell",
+            "name": "ghostwriter/shell"
         }
     },
     "scripts": {
