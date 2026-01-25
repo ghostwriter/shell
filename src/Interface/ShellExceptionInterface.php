@@ -4,4 +4,6 @@ declare(strict_types=1);
 
 namespace Ghostwriter\Shell\Interface;
 
-interface ExceptionInterface extends ShellExceptionInterface {}
+use Throwable;
+
+interface ShellExceptionInterface extends Throwable {}
