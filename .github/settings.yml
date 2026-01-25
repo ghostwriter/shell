@@ -7,10 +7,10 @@
     "state": "open"
   - "title": "0.1.2"
     "description": "Patch release – targeting 0.1.x branch (semantic version: 0.1.2)"
-    "state": "open"
-  - "title": "0.1.1"
-    "description": "Patch release – targeting 0.1.x branch (semantic version: 0.1.1)"
     "state": "closed"
+  - "title": "0.1.3"
+    "description": "Patch release – targeting 0.1.x branch (semantic version: 0.1.3)"
+    "state": "open"
 "repository":
   "name": "shell"
   "description": "Execute commands and external programs"
