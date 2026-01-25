@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\Shell\Interface;
+namespace Ghostwriter\Shell\Interface\Exception;
 
 use Throwable;
 
