@@ -44,20 +44,20 @@ final class CommandTest extends TestCase
     }
 
     /** @return Generator<array{0:string,1:list<string>}> */
-    public static function provideNewCases(): iterable
-    {
-        yield from [
-            'command' => ['command', ['argument-0', 'argument-1']],
-        ];
-    }
-
-    /** @return Generator<array{0:string,1:list<string>}> */
     public static function provideInvalidCases(): iterable
     {
         yield from [
             'empty-command' => ['', ['argument-0', 'argument-1'], [CommandNameCannotBeEmptyException::class]],
             'empty-argument' => ['command', ['', 'argument-1'], [CommandArgumentCannotBeEmptyException::class]],
             'empty-space-argument' => ['command', [' ', 'argument-1'], [CommandArgumentCannotBeEmptyException::class]],
+        ];
+    }
+
+    /** @return Generator<array{0:string,1:list<string>}> */
+    public static function provideNewCases(): iterable
+    {
+        yield from [
+            'command' => ['command', ['argument-0', 'argument-1']],
         ];
     }
 }
