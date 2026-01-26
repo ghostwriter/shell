@@ -71,6 +71,6 @@ final readonly class Runner implements RunnerInterface
             } while (! $splQueue->isEmpty());
         }
 
-        return Result::new($process->close(), $stdout->toString(), $stderr->toString());
+        return Result::new($process->command()->toArray(), $process->close(), $stdout->toString(), $stderr->toString());
     }
 }

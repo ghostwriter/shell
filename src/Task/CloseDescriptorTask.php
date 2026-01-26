@@ -12,9 +12,7 @@ use Throwable;
 
 final class CloseDescriptorTask implements TaskInterface
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function __invoke(DescriptorInterface $descriptor): void
     {

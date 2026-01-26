@@ -17,10 +17,8 @@ use function sprintf;
 #[CoversClass(EnvironmentVariables::class)]
 final class EnvironmentVariablesTest extends TestCase
 {
-    /**
-     * @return Generator<array{0:list{string,string}}>
-     */
-    public static function dataProvider(): Generator
+    /** @return Generator<array{0:list{string,string}}> */
+    public static function provideNewCases(): iterable
     {
         $key = 'BLM';
         $value = 'BlackLivesMatter';
@@ -42,10 +40,8 @@ final class EnvironmentVariablesTest extends TestCase
         unset($_ENV[$key], $_SERVER[$key]);
     }
 
-    /**
-     * @param array<string,string> $variables
-     */
-    #[DataProvider('dataProvider')]
+    /** @param array<string,string> $variables */
+    #[DataProvider('provideNewCases')]
     public static function testNew(array $variables): void
     {
         $environmentVariables = EnvironmentVariables::new($variables);
