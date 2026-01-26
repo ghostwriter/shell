@@ -9,15 +9,25 @@ use Override;
 
 final readonly class Result implements ResultInterface
 {
+    /** @param list<non-empty-string> $command */
     public function __construct(
+        public array $command,
         private int $exitCode,
         private string $stdout,
         private string $stderr,
     ) {}
 
-    public static function new(int $exitCode, string $stdout, string $stderr): self
+    /** @param list<non-empty-string> $command */
+    public static function new(array $command, int $exitCode, string $stdout, string $stderr): self
     {
-        return new self($exitCode, $stdout, $stderr);
+        return new self($command, $exitCode, $stdout, $stderr);
+    }
+
+    /** @return list<non-empty-string> */
+    #[Override]
+    public function command(): array
+    {
+        return $this->command;
     }
 
     #[Override]

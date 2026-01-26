@@ -13,9 +13,7 @@ use function is_dir;
 
 final readonly class WorkingDirectory implements WorkingDirectoryInterface
 {
-    /**
-     * @throws InvalidWorkingDirectoryException
-     */
+    /** @throws InvalidWorkingDirectoryException */
     public function __construct(
         private string $path,
     ) {
@@ -24,9 +22,7 @@ final readonly class WorkingDirectory implements WorkingDirectoryInterface
         }
     }
 
-    /**
-     * @throws InvalidWorkingDirectoryException
-     */
+    /** @throws InvalidWorkingDirectoryException */
     public static function new(?string $workingDirectory = null): self
     {
         return new self(match (true) {

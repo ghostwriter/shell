@@ -16,10 +16,8 @@ use function sys_get_temp_dir;
 #[CoversClass(WorkingDirectory::class)]
 final class WorkingDirectoryTest extends TestCase
 {
-    /**
-     * @return Generator<array{0:string}>
-     */
-    public static function dataProvider(): Generator
+    /** @return Generator<array{0:string}> */
+    public static function provideNewCases(): iterable
     {
         yield from [
             'getcwd()' => [getcwd()],
@@ -27,7 +25,7 @@ final class WorkingDirectoryTest extends TestCase
         ];
     }
 
-    #[DataProvider('dataProvider')]
+    #[DataProvider('provideNewCases')]
     public static function testNew(string $path): void
     {
         $workingDirectory = WorkingDirectory::new($path);

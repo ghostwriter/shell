@@ -8,8 +8,6 @@ use Throwable;
 
 interface TaskInterface
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function __invoke(DescriptorInterface $descriptor): void;
 }
