@@ -11,24 +11,18 @@ use function getenv;
 
 final readonly class EnvironmentVariables implements EnvironmentVariablesInterface
 {
-    /**
-     * @param array<string,string> $environmentVariables
-     */
+    /** @param array<string,string> $environmentVariables */
     public function __construct(
         private array $environmentVariables,
     ) {}
 
-    /**
-     * @param null|array<string,string> $environmentVariables
-     */
+    /** @param null|array<string,string> $environmentVariables */
     public static function new(?array $environmentVariables = null): self
     {
         return new self($environmentVariables ?? getenv() ?: []);
     }
 
-    /**
-     * @return array<string,string>
-     */
+    /** @return array<string,string> */
     #[Override]
     public function toArray(): array
     {
