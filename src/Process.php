@@ -25,9 +25,7 @@ use function set_error_handler;
 
 final readonly class Process implements ProcessInterface
 {
-    /**
-     * @var array{0:array{0:string,1:string},1:array{0:string,1:string},2:array{0:string,1:string}}
-     */
+    /** @var array{0:array{0:string,1:string},1:array{0:string,1:string},2:array{0:string,1:string}} */
     public const array DESCRIPTORS = [
         0 => ['pipe', 'r+b'], // stdin
         1 => ['pipe', 'w+b'], // stdout
@@ -37,9 +35,7 @@ final readonly class Process implements ProcessInterface
     /** @var array{0:resource,1:resource,2:resource} */
     public const array PIPES = [];
 
-    /**
-     * @param closed-resource|resource $stream
-     */
+    /** @param closed-resource|resource $stream */
     public function __construct(
         private CommandInterface $command,
         private EnvironmentVariablesInterface $environmentVariables,
@@ -48,9 +44,7 @@ final readonly class Process implements ProcessInterface
         private WorkingDirectoryInterface $workingDirectory,
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public static function new(
         CommandInterface $command,
         WorkingDirectoryInterface $workingDirectory,
@@ -85,9 +79,7 @@ final readonly class Process implements ProcessInterface
         );
     }
 
-    /**
-     * @throws FailedToTerminateProcessException
-     */
+    /** @throws FailedToTerminateProcessException */
     public function __destruct()
     {
         $this->stdio->close();
@@ -102,9 +94,7 @@ final readonly class Process implements ProcessInterface
         }
     }
 
-    /**
-     * @throws ProcessIsNotRunningException
-     */
+    /** @throws ProcessIsNotRunningException */
     #[Override]
     public function close(): int
     {
