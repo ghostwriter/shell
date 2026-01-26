@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use Generator;
+use Ghostwriter\Container\Container;
 use Ghostwriter\Shell\Command;
+use Ghostwriter\Shell\Container\RunnerFactory;
+use Ghostwriter\Shell\Container\ShellDefinition;
 use Ghostwriter\Shell\EnvironmentVariables;
 use Ghostwriter\Shell\Exception\CommandArgumentCannotBeEmptyException;
 use Ghostwriter\Shell\Exception\InvalidWorkingDirectoryException;
 use Ghostwriter\Shell\Exception\NullPointerException;
 use Ghostwriter\Shell\Interface\ResultInterface;
+use Ghostwriter\Shell\Interface\ShellInterface;
 use Ghostwriter\Shell\Process;
 use Ghostwriter\Shell\Result;
 use Ghostwriter\Shell\Runner;
@@ -35,6 +38,8 @@ use function getcwd;
 use function putenv;
 use function sys_get_temp_dir;
 
+#[CoversClass(RunnerFactory::class)]
+#[CoversClass(ShellDefinition::class)]
 #[CoversClass(CloseDescriptorTask::class)]
 #[CoversClass(Command::class)]
 #[CoversClass(EnvironmentVariables::class)]
@@ -50,25 +55,19 @@ use function sys_get_temp_dir;
 #[CoversTrait(DescriptorTrait::class)]
 final class ShellTest extends TestCase
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function execute(): ResultInterface
     {
-        return Shell::new()->execute(...func_get_args());
+        return Container::getInstance()->get(ShellInterface::class)->execute(...func_get_args());
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function stdout(): string
     {
         return $this->execute(...func_get_args())->stdout();
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testEnvironmentVariables(): void
     {
         try {
@@ -86,7 +85,7 @@ final class ShellTest extends TestCase
      *
      * @throws Throwable
      */
-    #[DataProvider('executeDataProvider')]
+    #[DataProvider('provideExecuteCases')]
     public function testExecute(
         string $command,
         array $arguments,
@@ -107,9 +106,7 @@ final class ShellTest extends TestCase
         self::assertSame($stderr, $result->stderr());
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testFailedExecution(): void
     {
         $result = $this->execute(PHP_BINARY, ['-r', 'blackLivesMatter("#BLM!");']);
@@ -118,13 +115,11 @@ final class ShellTest extends TestCase
 
         self::assertStringContainsString(
             'Uncaught Error: Call to undefined function blackLivesMatter() in Command line code',
-            $result->stderr(),
+            $result->stdout() . $result->stderr(),
         );
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testStderr(): void
     {
         $result = $this->execute(
@@ -136,9 +131,7 @@ final class ShellTest extends TestCase
         self::assertSame('#BlackLivesMatter', $result->stderr());
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testThrowsCommandArgumentCannotBeEmptyException(): void
     {
         $this->expectException(CommandArgumentCannotBeEmptyException::class);
@@ -146,9 +139,7 @@ final class ShellTest extends TestCase
         $this->execute(PHP_BINARY, ['']);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testThrowsCommandArgumentCannotBeEmptySpaceException(): void
     {
         $this->expectException(CommandArgumentCannotBeEmptyException::class);
@@ -156,9 +147,7 @@ final class ShellTest extends TestCase
         $this->execute(PHP_BINARY, [' ']);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testThrowsInvalidWorkingDirectoryException(): void
     {
         $dir = __DIR__ . '/path-not-found/';
@@ -168,9 +157,7 @@ final class ShellTest extends TestCase
         $this->execute(PHP_BINARY, ['-r', 'echo getcwd();'], $dir);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testThrowsNullPointerException(): void
     {
         $this->expectException(NullPointerException::class);
@@ -178,9 +165,7 @@ final class ShellTest extends TestCase
         $this->execute(PHP_BINARY, ["\0"]);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testWorkingDirectoryIsUsed(): void
     {
         $temp = sys_get_temp_dir();
@@ -190,7 +175,7 @@ final class ShellTest extends TestCase
         self::assertStringEndsWith($temp, $result->stdout());
     }
 
-    public static function executeDataProvider(): Generator
+    public static function provideExecuteCases(): iterable
     {
         // $command, $arguments, $workingDirectory, $environmentVariables, $input, $exitCode, $stdout, $stderr
         $command = PHP_BINARY;

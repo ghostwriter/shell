@@ -53,9 +53,7 @@ final readonly class Command implements CommandInterface
         return new self($command, $arguments);
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     #[Override]
     public function arguments(): array
     {
@@ -68,9 +66,7 @@ final readonly class Command implements CommandInterface
         return $this->name;
     }
 
-    /**
-     * @return list<string>
-     */
+    /** @return list<string> */
     #[Override]
     public function toArray(): array
     {

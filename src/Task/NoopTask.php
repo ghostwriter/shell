@@ -12,9 +12,7 @@ use Throwable;
 
 final class NoopTask implements TaskInterface
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function __invoke(DescriptorInterface $descriptor): void
     {
