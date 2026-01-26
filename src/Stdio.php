@@ -38,17 +38,13 @@ final readonly class Stdio implements StdioInterface
         );
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function __destruct()
     {
         $this->close();
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function close(): void
     {
@@ -57,27 +53,21 @@ final readonly class Stdio implements StdioInterface
         $this->stderr->close();
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function read(int $length = 4096): string
     {
         return $this->stdin->read($length);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function readLine(): string
     {
         return $this->stdin->readLine();
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function stderr(): StderrInterface
     {
@@ -96,36 +86,28 @@ final readonly class Stdio implements StdioInterface
         return $this->stdout;
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function write(string $string): int
     {
         return $this->stdout->write($string);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function writeError(string $string): int
     {
         return $this->stderr->write($string);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function writeErrorLine(string $string): int
     {
         return $this->stderr->write($string . PHP_EOL);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function writeLine(string $string): int
     {
