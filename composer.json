@@ -36,7 +36,7 @@
     "require-dev": {
         "ext-xdebug": "*",
         "ghostwriter/coding-standard": "dev-main",
-        "ghostwriter/container": "^6.1.1",
+        "ghostwriter/container": "^7.0.0",
         "mockery/mockery": "^1.6.12",
         "phpunit/phpunit": "^13.1.7",
         "symfony/var-dumper": "^8.0.8"
