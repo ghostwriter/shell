@@ -7,7 +7,7 @@ namespace Tests\Unit;
 use Ghostwriter\Container\Container;
 use Ghostwriter\Shell\Command;
 use Ghostwriter\Shell\Container\RunnerFactory;
-use Ghostwriter\Shell\Container\ShellDefinition;
+use Ghostwriter\Shell\Container\ShellProvider;
 use Ghostwriter\Shell\EnvironmentVariables;
 use Ghostwriter\Shell\Exception\CommandArgumentCannotBeEmptyException;
 use Ghostwriter\Shell\Exception\InvalidWorkingDirectoryException;
@@ -39,7 +39,7 @@ use function putenv;
 use function sys_get_temp_dir;
 
 #[CoversClass(RunnerFactory::class)]
-#[CoversClass(ShellDefinition::class)]
+#[CoversClass(ShellProvider::class)]
 #[CoversClass(CloseDescriptorTask::class)]
 #[CoversClass(Command::class)]
 #[CoversClass(EnvironmentVariables::class)]
