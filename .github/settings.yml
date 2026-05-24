@@ -29,11 +29,6 @@
 "repository":
   "name": "shell"
   "description": "Execute commands and external programs"
-  "topics":
-    - "ghostwriter"
-    - "shell"
-    - "php"
-    - "process"
   "homepage": "https://github.com/ghostwriter/shell"
   "default_branch": "0.1.x"
   "allow_auto_merge": true
