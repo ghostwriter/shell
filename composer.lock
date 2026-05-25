@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ff0db3d91bc890fceed3fbbefdfd1eb",
+    "content-hash": "9771497b4323a2aafdc9e8c65b19b66c",
     "packages": [],
     "packages-dev": [
         {
@@ -237,16 +237,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ghostwriter/coding-standard.git",
-                "reference": "afececade2eef113f1d76cefdf06d33ca660b86f"
+                "reference": "2bdc20814da0fd448a4edf5c5250b581d73cf88f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/afececade2eef113f1d76cefdf06d33ca660b86f",
-                "reference": "afececade2eef113f1d76cefdf06d33ca660b86f",
+                "url": "https://api.github.com/repos/ghostwriter/coding-standard/zipball/2bdc20814da0fd448a4edf5c5250b581d73cf88f",
+                "reference": "2bdc20814da0fd448a4edf5c5250b581d73cf88f",
                 "shasum": ""
             },
             "require": {
-                "boundwize/structarmed": "^0.7.9",
+                "boundwize/structarmed": "^0.7.10",
                 "ext-apcu": "*",
                 "ext-bcmath": "*",
                 "ext-ctype": "*",
@@ -294,7 +294,7 @@
                 "ext-zlib": "*",
                 "mockery/mockery": "^1.6.12",
                 "php": "~8.4.0 || ~8.5.0",
-                "phpunit/phpunit": "^13.1.11",
+                "phpunit/phpunit": "^13.1.12",
                 "symfony/var-dumper": "^8.0.8"
             },
             "conflict": {
@@ -357,7 +357,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-25T11:40:02+00:00"
+            "time": "2026-05-25T20:46:31+00:00"
         },
         {
             "name": "ghostwriter/config",
@@ -1593,16 +1593,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "13.1.11",
+            "version": "13.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "0f540976373361d1b4549adcb87913ce2116e904"
+                "reference": "ca98c9f757c0e1e0778ab8ff80c4fb84152facf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/0f540976373361d1b4549adcb87913ce2116e904",
-                "reference": "0f540976373361d1b4549adcb87913ce2116e904",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ca98c9f757c0e1e0778ab8ff80c4fb84152facf8",
+                "reference": "ca98c9f757c0e1e0778ab8ff80c4fb84152facf8",
                 "shasum": ""
             },
             "require": {
@@ -1624,7 +1624,7 @@
                 "sebastian/cli-parser": "^5.0.0",
                 "sebastian/comparator": "^8.2.1",
                 "sebastian/diff": "^8.3.0",
-                "sebastian/environment": "^9.3.1",
+                "sebastian/environment": "^9.3.2",
                 "sebastian/exporter": "^8.1.0",
                 "sebastian/git-state": "^1.0",
                 "sebastian/global-state": "^9.0.0",
@@ -1672,7 +1672,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/13.1.11"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/13.1.12"
             },
             "funding": [
                 {
@@ -1680,7 +1680,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-05-21T12:38:47+00:00"
+            "time": "2026-05-25T15:37:19+00:00"
         },
         {
             "name": "psr/container",
