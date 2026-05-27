@@ -38,6 +38,7 @@
         "boundwize/structarmed": "^0.7.12",
         "ghostwriter/coding-standard": "dev-main",
         "ghostwriter/container": "^7.0.2",
+        "ghostwriter/phpunit-assertions": "^0.1.0",
         "ghostwriter/testify": "^0.1.2",
         "mockery/mockery": "^1.6.12",
         "phpunit/phpunit": "^13.1.12",
@@ -60,8 +61,7 @@
     },
     "config": {
         "allow-plugins": {
-            "ghostwriter/coding-standard": true,
-            "infection/extension-installer": true
+            "ghostwriter/coding-standard": true
         },
         "bump-after-update": false,
         "classmap-authoritative": false,
