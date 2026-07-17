@@ -50,8 +50,7 @@
         "ghostwriter/container": "^7.0.2",
         "ghostwriter/phpunit-assertions": "^0.1.0",
         "mockery/mockery": "^1.6.12",
-        "phpunit/phpunit": "^13.2.1",
-        "symfony/var-dumper": "^8.1.0"
+        "phpunit/phpunit": "^13.2.1"
     },
     "prefer-stable": true,
     "autoload": {
