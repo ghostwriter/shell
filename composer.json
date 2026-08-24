@@ -48,7 +48,7 @@
         "ghostwriter/coding-standard": "dev-main",
         "ghostwriter/container": "^7.0.2",
         "ghostwriter/phpunit-assertions": "^0.1.0",
-        "mockery/mockery": "^1.6.12",
+        "mockery/mockery": "^1.6.15",
         "phpunit/phpunit": "^13.2.4"
     },
     "prefer-stable": true,
